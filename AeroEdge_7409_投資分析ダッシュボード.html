@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AeroEdge (7409) 投資分析ダッシュボード</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;0,800&family=Noto+Sans+JP:wght@400;500;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #070d1a;
+    --surface: #0e1a2e;
+    --surface2: #14233d;
+    --border: #1e3355;
+    --accent: #38bdf8;
+    --accent-dim: #1a6fa0;
+    --green: #34d399;
+    --red: #f87171;
+    --amber: #fbbf24;
+    --text: #e2e8f0;
+    --text-dim: #8899b4;
+    --text-muted: #526480;
+    --radius: 14px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', 'Noto Sans JP', sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+  .wrapper { max-width: 1000px; margin: 0 auto; padding: 32px 24px; }
+  
+  /* Header */
+  .header { margin-bottom: 28px; position: relative; }
+  .header::after {
+    content: '';
+    position: absolute; bottom: -14px; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, var(--accent), transparent 70%);
+  }
+  .header-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; }
+  .header-tag { font-size: 11px; color: var(--accent); letter-spacing: 3px; font-weight: 700; text-transform: uppercase; margin-bottom: 6px; }
+  .header h1 { font-size: 30px; font-weight: 800; letter-spacing: -0.5px; }
+  .header h1 span { color: var(--text-dim); font-weight: 400; font-size: 16px; margin-left: 8px; }
+  .header-meta { text-align: right; font-size: 11px; color: var(--text-muted); line-height: 1.8; }
+  .header-sub { font-size: 12px; color: var(--text-muted); margin-top: 6px; }
+
+  /* Tabs */
+  .tabs { display: flex; gap: 6px; margin: 28px 0 24px; flex-wrap: wrap; }
+  .tab-btn {
+    padding: 9px 20px; border-radius: 10px; border: 1px solid var(--border);
+    background: transparent; color: var(--text-dim); cursor: pointer;
+    font-family: inherit; font-size: 13px; font-weight: 500;
+    transition: all 0.25s ease;
+  }
+  .tab-btn:hover { border-color: var(--accent); color: var(--text); }
+  .tab-btn.active {
+    background: var(--accent); color: var(--bg); border-color: var(--accent); font-weight: 700;
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
+  }
+
+  /* Cards */
+  .grid { display: grid; gap: 16px; }
+  .g2 { grid-template-columns: 1fr 1fr; }
+  .g3 { grid-template-columns: 1fr 1fr 1fr; }
+  .g4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+  .span2 { grid-column: span 2; }
+  .span3 { grid-column: span 3; }
+  .span4 { grid-column: span 4; }
+  @media (max-width: 700px) { .g2, .g3, .g4 { grid-template-columns: 1fr; } .span2, .span3, .span4 { grid-column: span 1; } }
+  
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px 24px;
+    animation: fadeUp 0.4s ease both;
+  }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+  .card-title {
+    font-size: 12px; font-weight: 700; color: var(--accent); letter-spacing: 1.5px;
+    text-transform: uppercase; margin-bottom: 16px;
+    padding-bottom: 10px; border-bottom: 1px solid var(--border);
+  }
+
+  /* KPI */
+  .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 16px; }
+  .kpi { text-align: center; }
+  .kpi-label { font-size: 10px; color: var(--text-muted); letter-spacing: 0.5px; margin-bottom: 4px; }
+  .kpi-value { font-size: 22px; font-weight: 800; font-family: 'JetBrains Mono', monospace; }
+  .kpi-sub { font-size: 10px; margin-top: 2px; }
+  .kpi-sub.green { color: var(--green); }
+  .kpi-sub.amber { color: var(--amber); }
+  .kpi-sub.red { color: var(--red); }
+
+  /* Tags */
+  .tag { display: inline-block; padding: 2px 10px; border-radius: 5px; font-size: 11px; font-weight: 700; margin-right: 8px; }
+  .tag-green { background: rgba(52,211,153,0.15); color: var(--green); }
+  .tag-amber { background: rgba(251,191,36,0.15); color: var(--amber); }
+  .tag-accent { background: rgba(56,189,248,0.15); color: var(--accent); }
+  .tag-red { background: rgba(248,113,113,0.15); color: var(--red); }
+  .tag-gray { background: rgba(130,150,180,0.15); color: var(--text-dim); }
+
+  /* Table rows */
+  .row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+  .row:last-child { border-bottom: none; }
+  .row-label { color: var(--text-dim); }
+  .row-value { font-weight: 600; font-family: 'JetBrains Mono', monospace; font-size: 13px; }
+  .row-change { font-size: 11px; margin-left: 8px; }
+
+  /* Risk item */
+  .risk-item { display: flex; gap: 12px; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid var(--border); }
+  .risk-item:last-child { border-bottom: none; }
+  .risk-level { min-width: 44px; text-align: center; padding: 3px 8px; border-radius: 6px; font-size: 11px; font-weight: 700; }
+  .risk-title { font-size: 13px; font-weight: 600; }
+  .risk-detail { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+
+  /* Verdict box */
+  .verdict-box {
+    background: var(--bg); border: 1px solid rgba(56,189,248,0.2); border-radius: 12px; padding: 24px;
+  }
+  .verdict-badge {
+    display: inline-block; padding: 8px 20px; border-radius: 8px; font-weight: 800; font-size: 17px;
+    background: var(--amber); color: var(--bg); margin-bottom: 6px;
+  }
+  .verdict-sub { color: var(--text-muted); font-size: 13px; margin-left: 12px; }
+  .verdict-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 18px; font-size: 13px; line-height: 2; }
+  .verdict-cols h4 { font-size: 13px; margin-bottom: 4px; }
+  .note-box { margin-top: 16px; background: var(--surface2); padding: 14px 18px; border-radius: 8px; font-size: 11px; color: var(--text-muted); line-height: 1.8; }
+
+  /* Growth timeline */
+  .timeline-item { display: flex; gap: 12px; align-items: flex-start; padding: 8px 0; border-bottom: 1px solid var(--border); }
+  .timeline-item:last-child { border-bottom: none; }
+  .tl-year { min-width: 70px; font-size: 11px; font-weight: 700; font-family: 'JetBrains Mono', monospace; }
+  .tl-title { font-size: 13px; font-weight: 600; }
+  .tl-detail { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+
+  /* Chart container */
+  .chart-wrap { position: relative; height: 280px; margin-top: 4px; }
+  .chart-note { text-align: center; font-size: 10px; color: var(--text-muted); margin-top: 8px; }
+
+  /* Body text */
+  .body-text { font-size: 13px; line-height: 1.9; color: var(--text-dim); }
+  .body-text p { margin-bottom: 10px; }
+  .hl { color: var(--amber); font-weight: 700; }
+
+  /* Section heading inside card */
+  .section-head { font-size: 13px; font-weight: 700; color: var(--accent); margin: 14px 0 6px; }
+
+  .hidden { display: none; }
+</style>
+</head>
+<body>
+<div class="wrapper">
+  <!-- Header -->
+  <div class="header">
+    <div class="header-top">
+      <div>
+        <div class="header-tag">Investment Analysis Dashboard</div>
+        <h1>AeroEdge <span>7409 東証グロース</span></h1>
+        <div class="header-sub">航空機エンジン部品（LEAPエンジン向けチタンアルミブレード）製造・販売 ｜ 決算期: 6月 ｜ J-GAAP ｜ 非連結</div>
+      </div>
+      <div class="header-meta">
+        2026年6月期 第2四半期決算ベース<br>分析日: 2026年2月24日
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabs -->
+  <div class="tabs">
+    <button class="tab-btn active" onclick="showTab(0)">サマリー</button>
+    <button class="tab-btn" onclick="showTab(1)">業績分析</button>
+    <button class="tab-btn" onclick="showTab(2)">財務・CF</button>
+    <button class="tab-btn" onclick="showTab(3)">成長ドライバー</button>
+    <button class="tab-btn" onclick="showTab(4)">リスク・判断</button>
+  </div>
+
+  <!-- ==================== TAB 0: SUMMARY ==================== -->
+  <div id="tab-0" class="tab-content">
+    <div class="grid g2">
+      <div class="card span2">
+        <div class="card-title">主要KPI</div>
+        <div class="kpi-grid">
+          <div class="kpi"><div class="kpi-label">時価総額</div><div class="kpi-value" style="color:var(--text)">~600億</div><div class="kpi-sub" style="color:var(--text-muted)">円</div></div>
+          <div class="kpi"><div class="kpi-label">PER (予想)</div><div class="kpi-value" style="color:var(--amber)">~86倍</div><div class="kpi-sub amber">高バリュエーション</div></div>
+          <div class="kpi"><div class="kpi-label">PBR (実績)</div><div class="kpi-value" style="color:var(--amber)">~13.6倍</div><div class="kpi-sub amber">プレミアム</div></div>
+          <div class="kpi"><div class="kpi-label">売上成長率</div><div class="kpi-value" style="color:var(--green)">+46.0%</div><div class="kpi-sub green">2Q YoY</div></div>
+          <div class="kpi"><div class="kpi-label">営業利益率</div><div class="kpi-value" style="color:var(--green)">29.8%</div><div class="kpi-sub green">2Q実績</div></div>
+          <div class="kpi"><div class="kpi-label">自己資本比率</div><div class="kpi-value" style="color:var(--text)">45.0%</div><div class="kpi-sub" style="color:var(--text-muted)">安定的</div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">通期業績予想 (26/6期・上方修正後)</div>
+        <div class="row"><span class="row-label">売上高</span><span><span class="row-value">50.5億円</span><span class="row-change" style="color:var(--green)">+40.2%</span></span></div>
+        <div class="row"><span class="row-label">営業利益</span><span><span class="row-value">10.7億円</span><span class="row-change" style="color:var(--green)">+63.3%</span></span></div>
+        <div class="row"><span class="row-label">経常利益</span><span><span class="row-value">10.1億円</span><span class="row-change" style="color:var(--green)">+78.7%</span></span></div>
+        <div class="row"><span class="row-label">純利益</span><span><span class="row-value">7.0億円</span><span class="row-change" style="color:var(--red)">△4.7%</span></span></div>
+        <div class="row"><span class="row-label">2Q進捗率 (営業利益)</span><span class="row-value" style="color:var(--green)">68.9%</span></div>
+        <div style="font-size:11px;color:var(--text-muted);margin-top:10px">※純利益減は前期の繰延税金資産計上の反動。本業は大幅成長</div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">投資判断サマリー</div>
+        <div style="margin-bottom:10px"><span class="tag tag-green">強み</span><span style="font-size:13px">高参入障壁、受注残10年超、SAFRAN社と長期契約、シェア40%→40%台後半へ</span></div>
+        <div style="margin-bottom:10px"><span class="tag tag-amber">課題</span><span style="font-size:13px">高PER（約86倍）、無配、製品集中リスク</span></div>
+        <div><span class="tag tag-accent">注目</span><span style="font-size:13px">新材料の垂直統合（世界初）、eVTOL部品、新規エンジン案件2件</span></div>
+      </div>
+
+      <div class="card span2">
+        <div class="card-title">総合評価レーダーチャート</div>
+        <div class="chart-wrap" style="height:320px"><canvas id="radarChart"></canvas></div>
+        <div class="chart-note">各項目100点満点での定性評価。バリュエーションは低スコア＝割高</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== TAB 1: PL ==================== -->
+  <div id="tab-1" class="tab-content hidden">
+    <div class="grid g2">
+      <div class="card span2">
+        <div class="card-title">売上高・営業利益推移 (百万円)</div>
+        <div class="chart-wrap"><canvas id="plChart"></canvas></div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">営業利益率推移</div>
+        <div class="chart-wrap"><canvas id="marginChart"></canvas></div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">2Q損益計算書ハイライト</div>
+        <div class="row"><span class="row-label">売上高</span><span><span class="row-value">2,473百万</span><span class="row-change" style="color:var(--green)">+46.0%</span></span></div>
+        <div class="row"><span class="row-label">売上原価</span><span class="row-value">1,213百万</span></div>
+        <div class="row"><span class="row-label">売上総利益率</span><span><span class="row-value">50.9%</span><span class="row-change" style="color:var(--green)">前年46.3%</span></span></div>
+        <div class="row"><span class="row-label">販管費</span><span><span class="row-value">521百万</span><span class="row-change" style="color:var(--green)">+2.8%</span></span></div>
+        <div class="row"><span class="row-label">営業利益</span><span><span class="row-value">737百万</span><span class="row-change" style="color:var(--green)">+166.0%</span></span></div>
+        <div class="row"><span class="row-label">経常利益</span><span><span class="row-value">714百万</span><span class="row-change" style="color:var(--green)">+199.6%</span></span></div>
+        <div class="row"><span class="row-label">中間純利益</span><span><span class="row-value">487百万</span><span class="row-change" style="color:var(--green)">+141.6%</span></span></div>
+        <div style="font-size:11px;color:var(--text-muted);margin-top:12px">
+          ポイント: 売上総利益率が46.3%→50.9%に改善。販管費の伸びを+2.8%に抑制しながら売上+46%を達成。オペレーティングレバレッジが顕著に効いている。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== TAB 2: BS/CF ==================== -->
+  <div id="tab-2" class="tab-content hidden">
+    <div class="grid g2">
+      <div class="card">
+        <div class="card-title">財政状態 (2025年12月31日時点)</div>
+        <div class="row"><span class="row-label">総資産</span><span><span class="row-value">9,827百万</span><span class="row-change" style="color:var(--text-muted)">+19.7%</span></span></div>
+        <div class="row"><span class="row-label">純資産</span><span><span class="row-value">4,430百万</span><span class="row-change" style="color:var(--text-muted)">+13.9%</span></span></div>
+        <div class="row"><span class="row-label">自己資本比率</span><span class="row-value">45.0%</span></div>
+        <div class="row"><span class="row-label">有利子負債合計</span><span class="row-value">4,391百万</span></div>
+        <div class="row"><span class="row-label">現金及び預金</span><span><span class="row-value">3,340百万</span><span class="row-change" style="color:var(--green)">+112%</span></span></div>
+        <div class="row"><span class="row-label">ネットD/Eレシオ</span><span class="row-value">0.24倍</span></div>
+        <div class="row"><span class="row-label">BPS (1株純資産)</span><span class="row-value">約373円</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">キャッシュフロー推移 (百万円)</div>
+        <div class="chart-wrap"><canvas id="cfChart"></canvas></div>
+      </div>
+
+      <div class="card span2">
+        <div class="card-title">補助金の影響（注目ポイント）</div>
+        <div class="body-text">
+          <p>26/6期2Qの営業CFが<span class="hl">21.7億円</span>と大幅増加した主因は、<span class="hl">補助金受取額12.8億円</span>です。これは新材料用ラボ建屋・設備投資に対する政府補助金であり、一時的な要因を含みます。</p>
+          <p>補助金を除いた営業CFは約8.9億円で、前年同期（4.9億円）から約+82%改善。本業ベースのキャッシュ創出力も着実に向上しています。</p>
+          <p>投資CFは△12.7億円。有形固定資産取得（12.5億円）が中心で、新材料工場・新規エンジン案件向けの成長投資が続いています。財務CFは+8.5億円で、長期借入13億円の調達を実施（返済4.1億円）。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== TAB 3: GROWTH ==================== -->
+  <div id="tab-3" class="tab-content hidden">
+    <div class="grid g2">
+      <div class="card span2">
+        <div class="card-title">LEAPエンジン搭載航空機の受注残 vs 年間引渡 (機数・2025年12月末)</div>
+        <div class="chart-wrap"><canvas id="backlogChart"></canvas></div>
+        <div class="chart-note">受注残 ÷ 年間引渡 ＝ 10年超の需要可視性。出所：日本航空機開発協会</div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">チタンアルミブレード販売推移 (エンジン基数)</div>
+        <div class="chart-wrap" style="height:230px"><canvas id="engineChart"></canvas></div>
+        <div class="chart-note">26/6期2Qで403基（前年同期比+30.0%）。27/6期は前期比+45~55%見込み</div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">成長戦略ロードマップ</div>
+        <div class="timeline-item"><span class="tl-year" style="color:var(--green)">現在</span><div><div class="tl-title">LEAPチタンアルミブレード <span class="tag tag-green">量産中</span></div><div class="tl-detail">シェア40%、SAFRAN社との長期契約。材料は無償支給</div></div></div>
+        <div class="timeline-item"><span class="tl-year" style="color:var(--amber)">26/6期~</span><div><div class="tl-title">航空機エンジンA部品 <span class="tag tag-amber">量産準備中</span></div><div class="tl-detail">LEAP以外のエンジン。25年中旬量産開始目標</div></div></div>
+        <div class="timeline-item"><span class="tl-year" style="color:var(--amber)">26/6下期</span><div><div class="tl-title">航空機エンジンB部品 <span class="tag tag-amber">開発中</span></div><div class="tl-detail">SAFRAN以外の大手顧客。投資額17億円（補助金約半分）</div></div></div>
+        <div class="timeline-item"><span class="tl-year" style="color:var(--green)">27/6期~</span><div><div class="tl-title">新材料量産供給 <span class="tag tag-green">開発完了</span></div><div class="tl-detail">世界初の垂直統合。28年にフル量産、シェア40%台後半へ</div></div></div>
+        <div class="timeline-item"><span class="tl-year" style="color:var(--text-muted)">30年頃</span><div><div class="tl-title">チタンアルミブレード補修事業 <span class="tag tag-gray">計画中</span></div><div class="tl-detail">MRO（整備・修理・オーバーホール）市場への展開</div></div></div>
+        <div class="timeline-item"><span class="tl-year" style="color:var(--accent)">将来</span><div><div class="tl-title">eVTOL部品 <span class="tag tag-accent">契約済</span></div><div class="tl-detail">米社と量産契約を締結。空飛ぶクルマ市場への参入</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== TAB 4: RISK & VERDICT ==================== -->
+  <div id="tab-4" class="tab-content hidden">
+    <div class="grid g2">
+      <div class="card">
+        <div class="card-title">リスクマトリクス</div>
+        <div class="risk-item"><span class="risk-level" style="background:rgba(248,113,113,0.15);color:var(--red)">高</span><div><div class="risk-title">チタンアルミブレード事業依存</div><div class="risk-detail">売上の大部分がLEAPエンジン向け単一製品。顧客もSAFRAN社に集中</div></div></div>
+        <div class="risk-item"><span class="risk-level" style="background:rgba(251,191,36,0.15);color:var(--amber)">中→低</span><div><div class="risk-title">材料供給元1社依存</div><div class="risk-detail">欧州1社に依存→新材料開発で自社供給体制を構築中。28年にフル量産</div></div></div>
+        <div class="risk-item"><span class="risk-level" style="background:rgba(251,191,36,0.15);color:var(--amber)">中</span><div><div class="risk-title">為替リスク</div><div class="risk-detail">売上の大部分が外貨建て。1円/ドルあたり約30百万円の感応度</div></div></div>
+        <div class="risk-item"><span class="risk-level" style="background:rgba(251,191,36,0.15);color:var(--amber)">中</span><div><div class="risk-title">グロース市場の流動性</div><div class="risk-detail">時価総額約600億円。出来高は改善傾向だがプライム比では限定的</div></div></div>
+        <div class="risk-item"><span class="risk-level" style="background:rgba(52,211,153,0.15);color:var(--green)">低</span><div><div class="risk-title">航空機産業の景気循環</div><div class="risk-detail">受注残10年超で中長期の需要は堅調。ただし短期的なサプライチェーン問題あり</div></div></div>
+        <div class="risk-item"><span class="risk-level" style="background:rgba(251,191,36,0.15);color:var(--amber)">中</span><div><div class="risk-title">Boeing社の生産問題</div><div class="risk-detail">品質問題は緩和傾向。FAA生産上限が撤廃され、25年末に月産38機目標</div></div></div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">バリュエーション検討</div>
+        <div class="section-head">現在の水準</div>
+        <div style="font-size:13px;color:var(--text-dim);margin-bottom:14px">PER約86倍 / PBR約13.6倍は、グロース市場でも高水準。配当ゼロ。ROE予想約15.8%。</div>
+        <div class="section-head">成長率で正当化できるか？</div>
+        <div style="font-size:13px;color:var(--text-dim);margin-bottom:14px">27/6期のブレード販売基数は+45〜55%増見込み。PEGレシオは約1.3〜1.6倍程度で、超高成長を前提にすれば「やや割高〜フェアバリュー圏」。</div>
+        <div class="section-head">新材料の価値は織り込み済みか？</div>
+        <div style="font-size:13px;color:var(--text-dim);margin-bottom:14px">28年からの垂直統合・シェア拡大は中長期の大きなカタリスト。材料供給まで担うことで利益率が大幅に向上するポテンシャルがあり、現在の株価に十分織り込まれていない可能性。</div>
+        <div class="section-head">比較対象</div>
+        <div style="font-size:13px;color:var(--text-dim)">日本の航空機部品メーカー（ジャムコ、日機装等）はPER 15〜25倍程度が中心。AeroEdgeのプレミアムは「ニッチ独占 × 高成長 × 新材料カタリスト」への期待。</div>
+      </div>
+
+      <div class="card span2">
+        <div class="card-title">投資判断</div>
+        <div class="verdict-box">
+          <span class="verdict-badge">中立〜やや強気</span>
+          <span class="verdict-sub">中長期で注目。エントリータイミングの精査が重要</span>
+          <div class="verdict-cols">
+            <div>
+              <h4 style="color:var(--green)">✓ ポジティブ要因</h4>
+              <div style="color:var(--text-dim)">
+                • 航空機産業の構造的成長（受注残10年超）<br>
+                • 2Q営業利益率29.8%と急改善、通期上振れ余地<br>
+                • 新材料の垂直統合は世界初、28年からシェア拡大<br>
+                • 高参入障壁、SAFRAN社との長期契約<br>
+                • eVTOL・新規エンジン案件で事業多角化<br>
+                • 営業CFマージンが大幅改善
+              </div>
+            </div>
+            <div>
+              <h4 style="color:var(--red)">✗ ネガティブ要因</h4>
+              <div style="color:var(--text-dim)">
+                • PER約86倍は成長プレミアム込みでも高い<br>
+                • 無配・株主還元なし<br>
+                • 単一製品・単一顧客への依存度が高い<br>
+                • グロース市場の流動性リスク<br>
+                • 為替変動、航空機産業の外部環境リスク<br>
+                • 2Q営業CFの12.8億円は補助金（一時要因）
+              </div>
+            </div>
+          </div>
+          <div class="note-box">
+            ⚠ 免責事項：本分析は情報提供を目的とし、特定の投資推奨ではありません。投資判断はご自身の責任で行ってください。Claude（AI）の出力には誤りが含まれる可能性があります。必ず一次情報（決算短信・有価証券報告書等）をご自身で確認してください。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ===== Tab switching =====
+function showTab(n) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+  document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+  document.getElementById('tab-' + n).classList.remove('hidden');
+  document.querySelectorAll('.tab-btn')[n].classList.add('active');
+  // Init charts lazily
+  if (n === 0 && !window._radarDone) initRadar();
+  if (n === 1 && !window._plDone) initPL();
+  if (n === 2 && !window._cfDone) initCF();
+  if (n === 3 && !window._growthDone) initGrowth();
+}
+
+const CHART_COLORS = {
+  accent: '#38bdf8', accentDim: '#1a6fa0', green: '#34d399', red: '#f87171', amber: '#fbbf24', gray: '#526480', border: '#1e3355', text: '#8899b4'
+};
+const gridOpts = { color: CHART_COLORS.border };
+const tickOpts = { color: CHART_COLORS.text, font: { size: 11, family: "'DM Sans','Noto Sans JP',sans-serif" } };
+
+// ===== RADAR =====
+function initRadar() {
+  window._radarDone = true;
+  new Chart(document.getElementById('radarChart'), {
+    type: 'radar',
+    data: {
+      labels: ['売上成長性', '利益成長性', '収益性', '財務安全性', '参入障壁', '市場成長性', 'バリュエーション'],
+      datasets: [{ data: [90, 95, 80, 60, 95, 85, 30], borderColor: CHART_COLORS.accent, backgroundColor: 'rgba(56,189,248,0.15)', borderWidth: 2, pointBackgroundColor: CHART_COLORS.accent, pointRadius: 4 }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        r: {
+          min: 0, max: 100,
+          grid: { color: CHART_COLORS.border },
+          angleLines: { color: CHART_COLORS.border },
+          ticks: { display: false, stepSize: 25 },
+          pointLabels: { color: CHART_COLORS.text, font: { size: 11, family: "'Noto Sans JP',sans-serif" } }
+        }
+      }
+    }
+  });
+}
+
+// ===== PL Charts =====
+function initPL() {
+  window._plDone = true;
+  const periods = ['23/6期', '24/6期', '25/6期', '26/6期2Q', '26/6期予'];
+  new Chart(document.getElementById('plChart'), {
+    type: 'bar',
+    data: {
+      labels: periods,
+      datasets: [
+        { label: '売上高', data: [2920, 3350, 3602, 2473, 5050], backgroundColor: CHART_COLORS.accentDim, borderRadius: 4 },
+        { label: '営業利益', data: [479, 705, 655, 737, 1070], backgroundColor: CHART_COLORS.accent, borderRadius: 4 }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { labels: { color: CHART_COLORS.text, font: { size: 11 } } } },
+      scales: { x: { grid: gridOpts, ticks: tickOpts }, y: { grid: gridOpts, ticks: tickOpts } }
+    }
+  });
+  new Chart(document.getElementById('marginChart'), {
+    type: 'line',
+    data: {
+      labels: periods,
+      datasets: [{ label: '営業利益率 (%)', data: [16.4, 21.1, 18.2, 29.8, 21.2], borderColor: CHART_COLORS.green, backgroundColor: 'rgba(52,211,153,0.1)', borderWidth: 3, pointBackgroundColor: CHART_COLORS.green, pointRadius: 5, tension: 0.3, fill: true }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { labels: { color: CHART_COLORS.text, font: { size: 11 } } } },
+      scales: { x: { grid: gridOpts, ticks: tickOpts }, y: { grid: gridOpts, ticks: tickOpts, min: 0, max: 35 } }
+    }
+  });
+}
+
+// ===== CF Chart =====
+function initCF() {
+  window._cfDone = true;
+  new Chart(document.getElementById('cfChart'), {
+    type: 'bar',
+    data: {
+      labels: ['24/6期2Q', '25/6期通期', '26/6期2Q'],
+      datasets: [
+        { label: '営業CF', data: [490, 1330, 2169], backgroundColor: CHART_COLORS.green, borderRadius: 4 },
+        { label: '投資CF', data: [-833, -1950, -1272], backgroundColor: CHART_COLORS.red, borderRadius: 4 },
+        { label: '財務CF', data: [570, 370, 853], backgroundColor: CHART_COLORS.accent, borderRadius: 4 }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { labels: { color: CHART_COLORS.text, font: { size: 11 } } } },
+      scales: { x: { grid: gridOpts, ticks: tickOpts }, y: { grid: gridOpts, ticks: tickOpts } }
+    }
+  });
+}
+
+// ===== Growth Charts =====
+function initGrowth() {
+  window._growthDone = true;
+  new Chart(document.getElementById('backlogChart'), {
+    type: 'bar',
+    data: {
+      labels: ['A320neoファミリー', '737MAX', 'C919'],
+      datasets: [
+        { label: '受注残 (機)', data: [7145, 5411, 939], backgroundColor: CHART_COLORS.accent, borderRadius: 4 },
+        { label: '年間引渡 (機)', data: [607, 440, 15], backgroundColor: CHART_COLORS.green, borderRadius: 4 }
+      ]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { labels: { color: CHART_COLORS.text, font: { size: 11 } } } },
+      scales: { x: { grid: gridOpts, ticks: tickOpts }, y: { grid: gridOpts, ticks: { ...tickOpts, font: { size: 11, family: "'Noto Sans JP',sans-serif" } } } }
+    }
+  });
+  new Chart(document.getElementById('engineChart'), {
+    type: 'bar',
+    data: {
+      labels: ['23/6期', '24/6期', '25/6期2Q', '26/6期2Q'],
+      datasets: [{ label: 'エンジン基数', data: [563, 639, 310, 403], backgroundColor: CHART_COLORS.accent, borderRadius: 4 }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: { x: { grid: gridOpts, ticks: tickOpts }, y: { grid: gridOpts, ticks: tickOpts } }
+    }
+  });
+}
+
+// Init first tab
+initRadar();
+</script>
+</body>
+</html>
