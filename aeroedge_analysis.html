@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AeroEdge（7409）投資分析レポート</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, "Helvetica Neue", Arial, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif; color: #1a1a18; background: #f5f3ee; line-height: 1.6; }
+  .container { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem; }
+  h1 { font-size: 20px; font-weight: 600; margin-bottom: 4px; }
+  .subtitle { font-size: 13px; color: #73726c; margin-bottom: 2rem; }
+  .section { background: #fff; border: 0.5px solid #d9d7ce; border-radius: 12px; padding: 1.25rem; margin-bottom: 1.25rem; }
+  .section-title { font-size: 14px; font-weight: 600; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 0.5px solid #e8e6e0; }
+  .metric-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 12px; }
+  .metric-card { background: #f5f3ee; border-radius: 8px; padding: 12px; }
+  .metric-label { font-size: 12px; color: #73726c; margin-bottom: 4px; }
+  .metric-value { font-size: 20px; font-weight: 600; }
+  .metric-sub { font-size: 11px; margin-top: 2px; }
+  .up { color: #0f6e56; } .down { color: #993c1d; } .neutral { color: #73726c; }
+  .scenario-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .scenario-card { background: #fff; border: 0.5px solid #d9d7ce; border-radius: 12px; padding: 14px; }
+  .scenario-card.bear { border-left: 4px solid #D85A30; }
+  .scenario-card.base { border: 2px solid #185FA5; }
+  .scenario-card.bull { border-left: 4px solid #185FA5; }
+  .scenario-title { font-size: 13px; font-weight: 600; margin-bottom: 8px; }
+  .scenario-price { font-size: 26px; font-weight: 600; margin-bottom: 4px; }
+  .scenario-upside { font-size: 13px; font-weight: 600; margin-bottom: 10px; }
+  .scenario-row { display: flex; justify-content: space-between; font-size: 12px; color: #73726c; padding: 4px 0; border-bottom: 0.5px solid #e8e6e0; }
+  .scenario-row:last-child { border-bottom: none; }
+  .scenario-row span:last-child { font-weight: 500; color: #1a1a18; }
+  .risk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .risk-item { background: #f5f3ee; border-radius: 8px; padding: 12px; }
+  .risk-label { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+  .risk-body { font-size: 12px; color: #5f5e5a; line-height: 1.6; }
+  .badge { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 4px; margin-bottom: 6px; font-weight: 500; }
+  .badge-high { background: #fcebeb; color: #a32d2d; }
+  .badge-mid  { background: #faeeda; color: #854f0b; }
+  .badge-low  { background: #eaf3de; color: #3b6d11; }
+  .table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  th { font-weight: 600; text-align: right; padding: 7px 10px; border-bottom: 1px solid #d9d7ce; color: #73726c; background: #f5f3ee; }
+  th:first-child { text-align: left; }
+  td { text-align: right; padding: 6px 10px; border-bottom: 0.5px solid #e8e6e0; }
+  td:first-child { text-align: left; font-weight: 500; }
+  tr.hl td { background: #fafaf7; }
+  .slider-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .slider-row label { font-size: 13px; color: #5f5e5a; min-width: 140px; }
+  .slider-row input[type=range] { flex: 1; accent-color: #185FA5; }
+  .slider-row span { font-size: 13px; font-weight: 600; min-width: 52px; text-align: right; }
+  #dcf-result { font-size: 28px; font-weight: 600; color: #185FA5; }
+  #dcf-upside { font-size: 14px; margin-left: 8px; font-weight: 600; }
+  .dcf-row { display: flex; align-items: baseline; gap: 8px; margin: 12px 0 6px; }
+  .progress-bar { height: 6px; background: #e8e6e0; border-radius: 3px; overflow: hidden; }
+  .progress-fill { height: 100%; border-radius: 3px; transition: width 0.3s; }
+  .wacc-box { background: #f5f3ee; border-radius: 8px; padding: 14px; margin-bottom: 14px; }
+  .note { font-size: 11px; color: #888780; margin-top: 8px; line-height: 1.6; }
+  .verdict-box { background: #f5f3ee; border-radius: 12px; padding: 16px; }
+  .verdict-badge { display: inline-block; font-size: 13px; font-weight: 600; padding: 6px 16px; border-radius: 8px; margin-bottom: 12px; background: #faeeda; color: #854f0b; }
+  .verdict-body { font-size: 13px; color: #5f5e5a; line-height: 1.9; }
+  .base-badge { display: inline-block; background: #e6f1fb; color: #185FA5; font-size: 11px; padding: 2px 10px; border-radius: 4px; margin-bottom: 6px; font-weight: 500; }
+  .footer { text-align: center; font-size: 11px; color: #888780; margin-top: 2rem; padding-top: 1rem; border-top: 0.5px solid #d9d7ce; }
+  @media (max-width: 600px) {
+    .metric-grid { grid-template-columns: repeat(2, 1fr); }
+    .scenario-grid { grid-template-columns: 1fr; }
+    .risk-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <h1>AeroEdge（7409）投資分析レポート</h1>
+  <div class="subtitle">2026年3月現在 ｜ 参照株価: ¥4,500（分析基準） ｜ FY2025実績ベース</div>
+
+  <!-- KPI -->
+  <div class="section">
+    <div class="section-title">直近業績サマリー（FY2025実績 + FY2026 2Q速報）</div>
+    <div class="metric-grid">
+      <div class="metric-card">
+        <div class="metric-label">売上高 FY2025</div>
+        <div class="metric-value">36.0億</div>
+        <div class="metric-sub up">+7.5% YoY</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">営業利益 FY2025</div>
+        <div class="metric-value">6.6億</div>
+        <div class="metric-sub neutral">営業利益率 18.2%</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">2Q売上（累計）</div>
+        <div class="metric-value">24.7億</div>
+        <div class="metric-sub up">+46% YoY ★</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">2Q営業利益（累計）</div>
+        <div class="metric-value">7.4億</div>
+        <div class="metric-sub up">+166% YoY ★</div>
+      </div>
+    </div>
+    <div class="metric-grid">
+      <div class="metric-card">
+        <div class="metric-label">ROE（FY2025）</div>
+        <div class="metric-value up">21.1%</div>
+        <div class="metric-sub">高水準を維持</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">営業CF（FY2025）</div>
+        <div class="metric-value">13.3億</div>
+        <div class="metric-sub neutral">EBITDA 10.4億</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">自己資本比率</div>
+        <div class="metric-value">47.3%</div>
+        <div class="metric-sub up">FY2022の17.7%から大改善</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">通期会社予想（上方修正）</div>
+        <div class="metric-value">50.5億</div>
+        <div class="metric-sub up">売上 +40.2%</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 財務推移 -->
+  <div class="section">
+    <div class="section-title">財務推移（FY2020〜FY2025）</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>指標</th>
+            <th>FY2020</th><th>FY2021</th><th>FY2022</th>
+            <th>FY2023</th><th>FY2024</th><th>FY2025</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>売上高（億円）</td>
+            <td>21.1</td><td>8.5</td><td>19.6</td><td>29.2</td><td>33.5</td><td>36.0</td>
+          </tr>
+          <tr class="hl">
+            <td>営業利益（億円）</td>
+            <td class="down">赤字</td><td class="down">赤字</td><td class="down">-1.2</td>
+            <td class="up">+4.8</td><td class="up">+7.1</td><td class="up">+6.6</td>
+          </tr>
+          <tr>
+            <td>純利益（億円）</td>
+            <td class="down">-4.6</td><td class="down">-7.7</td><td class="up">+0.07</td>
+            <td class="up">+6.7</td><td class="up">+7.0</td><td class="up">+7.3</td>
+          </tr>
+          <tr class="hl">
+            <td>営業CF（億円）</td>
+            <td>—</td><td class="down">-0.9</td><td class="up">+0.4</td>
+            <td class="up">+10.8</td><td class="up">+13.9</td><td class="up">+13.3</td>
+          </tr>
+          <tr>
+            <td>設備投資（億円）</td>
+            <td>—</td><td>—</td><td>—</td>
+            <td>1.4</td><td class="down">17.6</td><td class="down">17.8</td>
+          </tr>
+          <tr class="hl">
+            <td>FCF（億円）</td>
+            <td>—</td><td>—</td><td>—</td>
+            <td class="up">+9.4</td><td class="down">-1.4</td><td class="down">-4.6</td>
+          </tr>
+          <tr>
+            <td>自己資本比率</td>
+            <td>30.4%</td><td>18.7%</td><td>17.7%</td>
+            <td>27.9%</td><td>42.7%</td><td class="up">47.3%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note">※ FCF = 営業CF - 設備投資（概算）。FY2024〜FY2025は大型設備投資フェーズ。</div>
+  </div>
+
+  <!-- DCF シミュレーター -->
+  <div class="section">
+    <div class="section-title">DCF理論株価シミュレーター</div>
+    <div class="wacc-box">
+      <div class="slider-row">
+        <label>売上成長率（5年平均）</label>
+        <input type="range" id="s-growth" min="10" max="50" value="30" step="1">
+        <span id="v-growth">30%</span>
+      </div>
+      <div class="slider-row">
+        <label>最終営業利益率</label>
+        <input type="range" id="s-margin" min="10" max="30" value="20" step="1">
+        <span id="v-margin">20%</span>
+      </div>
+      <div class="slider-row">
+        <label>WACC</label>
+        <input type="range" id="s-wacc" min="6" max="14" value="9" step="0.5">
+        <span id="v-wacc">9.0%</span>
+      </div>
+      <div class="slider-row">
+        <label>永続成長率（g）</label>
+        <input type="range" id="s-g" min="0" max="4" value="2" step="0.5">
+        <span id="v-g">2.0%</span>
+      </div>
+    </div>
+    <div class="dcf-row">
+      <span style="font-size:13px; color:#73726c;">DCF理論株価</span>
+      <span id="dcf-result">—</span>
+      <span id="dcf-upside"></span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="dcf-bar" style="background:#1D9E75; width:0%"></div></div>
+    <div class="note" id="dcf-breakdown"></div>
+    <div class="note" style="margin-top:6px;">モデル：FY2026〜FY2030の5年間FCF予測をDCFし、ターミナルバリューを加算。発行済株式数384万株。FCF = NOPAT × (1-再投資率)。FY2027までFCFネガティブを想定。</div>
+  </div>
+
+  <!-- シナリオ分析 -->
+  <div class="section">
+    <div class="section-title">3シナリオ比較（DCF + PER/EV-EBITDA クロスチェック）</div>
+    <div class="scenario-grid">
+      <div class="scenario-card bear">
+        <div class="scenario-title down">ベアシナリオ</div>
+        <div class="scenario-price">¥1,800〜2,500</div>
+        <div class="scenario-upside down">現在比 −44〜−60%</div>
+        <div class="scenario-row"><span>売上成長（5年）</span><span>+15%/年</span></div>
+        <div class="scenario-row"><span>営業利益率</span><span>12〜15%</span></div>
+        <div class="scenario-row"><span>WACC</span><span>11%</span></div>
+        <div class="scenario-row"><span>前提</span><span>Boeing遅延長期化</span></div>
+        <div class="scenario-row"><span>想定PER</span><span>30〜40倍</span></div>
+      </div>
+      <div class="scenario-card base">
+        <div class="base-badge">ベースシナリオ</div>
+        <div class="scenario-title" style="color:#185FA5;">フェアバリュー</div>
+        <div class="scenario-price">¥3,500〜5,500</div>
+        <div class="scenario-upside" style="color:#0f6e56;">現在比 −20〜+22%</div>
+        <div class="scenario-row"><span>売上成長（5年）</span><span>+25〜30%/年</span></div>
+        <div class="scenario-row"><span>営業利益率</span><span>18〜22%</span></div>
+        <div class="scenario-row"><span>WACC</span><span>9%</span></div>
+        <div class="scenario-row"><span>前提</span><span>通期予想50.5億達成</span></div>
+        <div class="scenario-row"><span>想定PER</span><span>50〜70倍</span></div>
+      </div>
+      <div class="scenario-card bull">
+        <div class="scenario-title" style="color:#185FA5;">ブルシナリオ</div>
+        <div class="scenario-price">¥7,000〜10,000</div>
+        <div class="scenario-upside" style="color:#185FA5;">現在比 +55〜+122%</div>
+        <div class="scenario-row"><span>売上成長（5年）</span><span>+35〜40%/年</span></div>
+        <div class="scenario-row"><span>営業利益率</span><span>22〜28%</span></div>
+        <div class="scenario-row"><span>WACC</span><span>8%</span></div>
+        <div class="scenario-row"><span>前提</span><span>新材料量産+シェア拡大</span></div>
+        <div class="scenario-row"><span>想定PER</span><span>80〜100倍</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- バリュエーション -->
+  <div class="section">
+    <div class="section-title">マルチプル・バリュエーション（クロスチェック）</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>指標</th>
+            <th>現在値（株価4,500円）</th>
+            <th>評価</th>
+            <th>コメント</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="hl">
+            <td>予想PER（FY2026通期）</td>
+            <td>~75〜90倍</td>
+            <td class="down">割高感あり</td>
+            <td>EPS≈59円想定（通期予想ベース）</td>
+          </tr>
+          <tr>
+            <td>実績PER（FY2025）</td>
+            <td>23.5倍</td>
+            <td class="up">割安</td>
+            <td>EPS 191円 × PER 23.5倍</td>
+          </tr>
+          <tr class="hl">
+            <td>PBR（実績）</td>
+            <td>4.4倍</td>
+            <td class="down">高い</td>
+            <td>BPS 1,011円。成長プレミアム込み</td>
+          </tr>
+          <tr>
+            <td>EV/EBITDA</td>
+            <td>~50〜60倍</td>
+            <td class="down">割高</td>
+            <td>時価総額+有利子負債 / EBITDA 10億</td>
+          </tr>
+          <tr class="hl">
+            <td>PSR（売上高倍率）</td>
+            <td>~12倍（FY2026予想）</td>
+            <td class="down">高い</td>
+            <td>売上50.5億に対し時価総額600億超</td>
+          </tr>
+          <tr>
+            <td>アナリスト目標株価</td>
+            <td>6,000円（1社）</td>
+            <td class="up">+33%の余地</td>
+            <td>米系大手証券、強気据え置き</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note">※ 株価4,500円、発行済株式数384万株、時価総額≒173億円で計算。<br>
+    ※ FY2026通期予想：売上50.5億、営業利益10.7億（会社上方修正後）。</div>
+  </div>
+
+  <!-- リスクと強み -->
+  <div class="section">
+    <div class="section-title">強み・リスク分析</div>
+    <div class="risk-grid">
+      <div class="risk-item">
+        <div class="badge badge-low">強み</div>
+        <div class="risk-label">高参入障壁 / グローバル複占</div>
+        <div class="risk-body">チタンアルミブレードを量産できるのは世界2社のみ。代替困難な技術的護城河。</div>
+      </div>
+      <div class="risk-item">
+        <div class="badge badge-low">強み</div>
+        <div class="risk-label">長期契約 + シェア拡大</div>
+        <div class="risk-body">SAFRANと2034年まで契約延長。シェア35%→40%（2028年以降さらに拡大予定）。</div>
+      </div>
+      <div class="risk-item">
+        <div class="badge badge-low">強み</div>
+        <div class="risk-label">材料垂直統合で収益性向上</div>
+        <div class="risk-body">新材料の内製化（2027年度から量産開始）により、材料依存リスク解消＋利益率改善期待。</div>
+      </div>
+      <div class="risk-item">
+        <div class="badge badge-low">強み</div>
+        <div class="risk-label">コロナ禍からV字回復済み</div>
+        <div class="risk-body">FY2021に最悪期（売上8.5億、赤字7.7億）を脱し、FY2023から急回復。財務体質も大改善。</div>
+      </div>
+      <div class="risk-item">
+        <div class="badge badge-high">重大リスク</div>
+        <div class="risk-label">SAFRAN / Boeing単一依存</div>
+        <div class="risk-body">売上の96.8%がSAFRAN向け。Boeing 737MAX問題の長期化は直撃リスク。</div>
+      </div>
+      <div class="risk-item">
+        <div class="badge badge-high">重大リスク</div>
+        <div class="risk-label">新材料量産リスク</div>
+        <div class="risk-body">2027年度から量産予定の新材料は「鋳造は初めての経験」と自社開示。失敗時の業績影響大。</div>
+      </div>
+      <div class="risk-item">
+        <div class="badge badge-mid">中リスク</div>
+        <div class="risk-label">FCFがマイナス継続</div>
+        <div class="risk-body">大型設備投資（FY2024: 17.6億、FY2025: 17.8億）によりFCFは赤字。借入金33.5億と増加。</div>
+      </div>
+      <div class="risk-item">
+        <div class="badge badge-mid">中リスク</div>
+        <div class="risk-label">為替リスク（ドル建て売上）</div>
+        <div class="risk-body">売上の大半がUSDベース。円高局面でのマイナス影響。新契約で一定のヘッジ条項あり。</div>
+      </div>
+      <div class="risk-item">
+        <div class="badge badge-mid">中リスク</div>
+        <div class="risk-label">生産拠点集中（栃木1箇所）</div>
+        <div class="risk-body">自然災害・工場事故で全停止リスク。BCPはあるが地理的分散なし。</div>
+      </div>
+      <div class="risk-item">
+        <div class="badge badge-low">低リスク</div>
+        <div class="risk-label">ストックオプション希薄化</div>
+        <div class="risk-body">潜在株式数57.8万株（発行済の15%）。段階的行使による希薄化に注意。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 投資判断 -->
+  <div class="section">
+    <div class="section-title">総合投資判断（2026年3月現在・分析基準株価4,500円）</div>
+    <div class="verdict-box">
+      <div class="verdict-badge">⚖ 中立〜弱気（現時点）</div>
+      <div class="verdict-body">
+        <strong>ポジ：</strong>2026年2Qが売上+46%・営業利益+166%と爆発的成長。通期予想を上方修正。グローバル複占ビジネスで長期需要可視性は高い。新材料垂直統合が実現すれば利益率が大幅改善しうる。<br><br>
+        <strong>ネガ：</strong>現在株価（約4,500円）はDCFベースシナリオのほぼ上限水準。予想PERは75〜90倍超と成長期待を先取りしている。FCFは設備投資フェーズでマイナス。新材料量産リスクは未顕在化。<br><br>
+        <strong>投資戦略：</strong>2027年度以降、新材料量産開始＋シェア拡大が確認できれば「FCFが急速にプラス転換する転換点」になりうる。現時点は「監視継続・押し目待ち（目安：3,000〜3,500円圏）」が合理的。
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    ※ 本分析は投資教育目的の試算です。実際の投資判断は個人の責任で行ってください。EDINET/TDnet公開データ、会社開示資料に基づく。<br>
+    作成日：2026年3月 ｜ データソース：EDINET DB、会社決算短信、各種公開情報
+  </div>
+</div>
+
+<script>
+var sharesM = 3.843;
+var currentPrice = 4500;
+var baseRevFY25 = 36.0;
+
+function calcDCF() {
+  var growthRate = parseFloat(document.getElementById('s-growth').value) / 100;
+  var terminalMargin = parseFloat(document.getElementById('s-margin').value) / 100;
+  var wacc = parseFloat(document.getElementById('s-wacc').value) / 100;
+  var g = parseFloat(document.getElementById('s-g').value) / 100;
+
+  document.getElementById('v-growth').textContent = Math.round(growthRate * 100) + '%';
+  document.getElementById('v-margin').textContent = Math.round(terminalMargin * 100) + '%';
+  document.getElementById('v-wacc').textContent = (wacc * 100).toFixed(1) + '%';
+  document.getElementById('v-g').textContent = (g * 100).toFixed(1) + '%';
+
+  var margins = [0.10, 0.14, 0.17, 0.19, terminalMargin];
+  var reinvestRates = [2.5, 1.8, 1.4, 1.0, 0.7];
+
+  var fcfs = [];
+  var rev = baseRevFY25;
+  for (var i = 0; i < 5; i++) {
+    rev *= (1 + growthRate * (1 - i * 0.04));
+    var nopat = rev * margins[i] * 0.70;
+    var fcf = nopat * (1 - (reinvestRates[i] / 10));
+    fcfs.push(fcf);
+  }
+
+  var pvFCF = 0;
+  for (var j = 0; j < 5; j++) {
+    pvFCF += fcfs[j] / Math.pow(1 + wacc, j + 1);
+  }
+
+  var terminalFCF = fcfs[4] * (1 + g);
+  var tv = terminalFCF / (wacc - g);
+  var pvTV = tv / Math.pow(1 + wacc, 5);
+
+  var netDebt = (33.5 - 15.7);
+  var equityValue = pvFCF + pvTV - netDebt;
+  var perShare = Math.round(equityValue * 1e8 / (sharesM * 1e6));
+
+  var upside = ((perShare / currentPrice - 1) * 100).toFixed(0);
+
+  document.getElementById('dcf-result').textContent = '¥' + perShare.toLocaleString();
+  var upsideEl = document.getElementById('dcf-upside');
+  if (perShare > currentPrice) {
+    upsideEl.textContent = '+' + upside + '% 割安';
+    upsideEl.style.color = '#0f6e56';
+  } else {
+    upsideEl.textContent = upside + '% 割高';
+    upsideEl.style.color = '#993c1d';
+  }
+
+  var barPct = Math.min(100, Math.max(0, (perShare / 10000) * 100));
+  var bar = document.getElementById('dcf-bar');
+  bar.style.width = barPct + '%';
+  bar.style.background = perShare > currentPrice ? '#1D9E75' : '#D85A30';
+
+  document.getElementById('dcf-breakdown').textContent =
+    'PV(FCF): ' + pvFCF.toFixed(1) + '億円 ｜ PV(TV): ' + pvTV.toFixed(1) + '億円 ｜ ネット借入: ' + netDebt.toFixed(1) + '億円 ｜ エクイティ価値: ' + equityValue.toFixed(1) + '億円';
+}
+
+var ids = ['s-growth','s-margin','s-wacc','s-g'];
+for (var k = 0; k < ids.length; k++) {
+  document.getElementById(ids[k]).addEventListener('input', calcDCF);
+}
+calcDCF();
+</script>
+</body>
+</html>
