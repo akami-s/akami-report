@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>グローバルマーケットダイジェスト 2026/3/26–4/9</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700;900&family=Noto+Sans+JP:wght@300;400;500&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
@@ -18,12 +18,17 @@
   --header-bg: #0A1628;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+  overflow-x: hidden;
+  width: 100%;
+}
 body {
   background: #10192e;
   display: block;
   padding: 32px 0 64px;
   font-family: 'Noto Sans JP', sans-serif;
   overflow-x: hidden;
+  width: 100%;
 }
 
 /* ── Scale wrapper ── */
@@ -32,6 +37,10 @@ body {
   height: 900px;
   transform-origin: top left;
   flex-shrink: 0;
+  /* JS実行前フラッシュ防止：初期は非表示、rescale後にfade-in */
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  will-change: transform;
 }
 
 /* ── Slide root ── */
@@ -383,17 +392,30 @@ body {
 <script>
 window.addEventListener('DOMContentLoaded', function() {
   var wrappers = document.querySelectorAll('.scale-outer');
+  var resizeTimer = null;
+
   function rescale() {
-    var vw = window.innerWidth;
+    // clientWidth はスクロールバーを除いた正確な幅を返す（innerWidth より信頼性が高い）
+    var vw = document.documentElement.clientWidth || window.innerWidth;
     var scale = vw / 1440;
     wrappers.forEach(function(w) {
       w.style.transform = 'scale(' + scale + ')';
       w.style.transformOrigin = 'top left';
+      // (900 * scale) が実際の表示高さ。-900 で overflow 分を詰め、+32 でスライド間ギャップ
       w.style.marginBottom = ((900 * scale) - 900 + 32) + 'px';
+      // FOUC 防止：rescale 後に表示
+      w.style.opacity = '1';
     });
   }
+
+  // 初回実行
   rescale();
-  window.addEventListener('resize', rescale);
+
+  // resize はデバウンス（アドレスバー出没での暴走を防ぐ）
+  window.addEventListener('resize', function() {
+    if (resizeTimer) clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(rescale, 120);
+  });
 });
 </script>
 
