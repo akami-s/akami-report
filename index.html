@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Global Macro Digest — Library</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700;900&family=Noto+Sans+JP:wght@300;400;500&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0A1628;
+    --navy-soft: #1A2740;
+    --gold: #D4820A;
+    --gold-soft: #E8A845;
+    --bg: #FFFFFF;
+    --bg-alt: #F5F7FA;
+    --bg-hover: #EBF0F7;
+    --text: #0A1628;
+    --text-muted: #5A6978;
+    --border: #E1E6EE;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100%; overflow-x: hidden; }
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .header {
+    background: var(--navy);
+    color: #FFF;
+    padding: 36px 24px 32px;
+    border-bottom: 4px solid var(--gold);
+  }
+  .header-inner {
+    max-width: 980px;
+    margin: 0 auto;
+  }
+  .brand-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    color: var(--gold-soft);
+    margin-bottom: 8px;
+  }
+  .brand-title {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 900;
+    font-size: 28px;
+    letter-spacing: 0.02em;
+    margin-bottom: 6px;
+  }
+  .brand-sub {
+    font-size: 14px;
+    color: #B5BFC9;
+    font-weight: 300;
+  }
+  .stats-bar {
+    background: var(--navy-soft);
+    color: #B5BFC9;
+    padding: 10px 24px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+  }
+  .stats-inner {
+    max-width: 980px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+  .stats-inner span strong { color: var(--gold-soft); font-weight: 700; }
+  .container {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 32px 24px 64px;
+  }
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--text-muted);
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-bottom: 32px;
+  }
+  @media (min-width: 720px) {
+    .grid { grid-template-columns: 1fr 1fr; }
+  }
+  .card {
+    display: block;
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--gold);
+    border-radius: 8px;
+    padding: 18px 22px;
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.15s ease, transform 0.15s ease, border-left-color 0.15s ease;
+  }
+  .card:hover {
+    background: var(--bg-hover);
+    border-left-color: var(--navy);
+    transform: translateY(-1px);
+  }
+  .card-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+  }
+  .card-period {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--navy);
+    letter-spacing: 0.02em;
+  }
+  .card-ym {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
+  }
+  .badge {
+    background: var(--gold);
+    color: #FFF;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 3px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .card-title {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 700;
+    font-size: 15.5px;
+    line-height: 1.55;
+    color: var(--text);
+  }
+  .footer {
+    background: var(--navy);
+    color: #B5BFC9;
+    text-align: center;
+    padding: 20px 24px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+  }
+  .footer strong { color: var(--gold-soft); font-weight: 700; }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="brand-label">◆ AKAMI-S ／ INVESTMENT EDUCATION</div>
+    <div class="brand-title">Global Macro Digest — Library</div>
+    <div class="brand-sub">週次の世界マクロ／市場ダイジェスト・アーカイブ</div>
+  </div>
+</header>
+
+<div class="stats-bar">
+  <div class="stats-inner">
+    <span>掲載数: <strong>7</strong></span>
+    <span>最終更新: <strong>2026.04.22</strong></span>
+    <span>SOURCE: <strong>akami-s/akami-report</strong></span>
+  </div>
+</div>
+
+<main class="container">
+  <div class="section-label">◆ レポート一覧（新しい順）</div>
+  <div class="grid">
+        <a href="digest_2026-04-08_04-22.html" class="card">
+          <div class="card-meta">
+            <span class="card-period">2026.04.08 – 04.22</span>
+            <span class="card-ym">2026年04月</span>
+            
+          </div>
+          <div class="card-title">停戦は延長された。それでも金は$4,780を手放さない — 市場が織り込んだ&quot;次の問い&quot;</div>
+        </a>
+
+        <a href="digest_2026-04-01_04-15_v2.html" class="card">
+          <div class="card-meta">
+            <span class="card-period">2026.04.01 – 04.15</span>
+            <span class="card-ym">2026年04月</span>
+            <span class="badge">v2</span>
+          </div>
+          <div class="card-title">停戦ラリーの裏で、金はなぜ売られなかったのか — 市場が抱える二重の緊張感</div>
+        </a>
+
+        <a href="digest_2026-04-01_04-15.html" class="card">
+          <div class="card-meta">
+            <span class="card-period">2026.04.01 – 04.15</span>
+            <span class="card-ym">2026年04月</span>
+            
+          </div>
+          <div class="card-title">&quot;停戦の気配&quot;だけで最高値を買う — 今の相場が、黙って飲み込んでいるもの</div>
+        </a>
+
+        <a href="digest_2026-03-24_04-14.html" class="card">
+          <div class="card-meta">
+            <span class="card-period">2026.03.24 – 04.14</span>
+            <span class="card-ym">2026年04月</span>
+            
+          </div>
+          <div class="card-title">グローバルマーケットダイジェスト 2026/3/24–4/14</div>
+        </a>
+
+        <a href="digest_2026-03-27_04-14.html" class="card">
+          <div class="card-meta">
+            <span class="card-period">2026.03.27 – 04.14</span>
+            <span class="card-ym">2026年04月</span>
+            
+          </div>
+          <div class="card-title">イラン戦争下の &quot;ピーク・オイル恐怖&quot; — 株は外交を買い、金は構造を買う</div>
+        </a>
+
+        <a href="digest_2026-03-26_04-09.html" class="card">
+          <div class="card-meta">
+            <span class="card-period">2026.03.26 – 04.09</span>
+            <span class="card-ym">2026年04月</span>
+            
+          </div>
+          <div class="card-title">グローバルマーケットダイジェスト 2026/3/26–4/9</div>
+        </a>
+
+        <a href="digest_2026-03-25_04-08.html" class="card">
+          <div class="card-meta">
+            <span class="card-period">2026.03.25 – 04.08</span>
+            <span class="card-ym">2026年04月</span>
+            
+          </div>
+          <div class="card-title">グローバルマーケットダイジェスト 2026/3/25–4/8</div>
+        </a>
+  </div>
+</main>
+
+<footer class="footer">
+  GLOBAL MACRO DIGEST  ●  © <strong>akami-s</strong>  ●  Educational use only
+</footer>
+
+</body>
+</html>
