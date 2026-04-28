@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>マーケットダイジェスト 2026-04-14〜04-27</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@700;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg-primary:#FFFFFF;--bg-secondary:#F5F7FA;--bg-tertiary:#EBF0F7;
+  --text-primary:#0A1628;--text-secondary:#1E3A5F;--text-muted:#4A6080;
+  --accent-red:#C0392B;--accent-amber:#D4820A;--accent-green:#1A7A3C;--accent-blue:#1565C0;
+  --header-bg:#0A1628;--header-text:#FFFFFF;--border-light:#D0DCE8;
+  --slide-w:1440px;--slide-h:900px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{overflow-x:hidden;width:100%;}
+body{display:block;overflow-x:hidden;width:100%;background:#111;font-family:'Noto Sans JP',sans-serif;}
+.scale-outer{width:1440px;height:900px;transform-origin:top left;opacity:0;transition:opacity 0.15s ease;will-change:transform;margin:0 auto;}
+.slide{width:1440px;height:900px;background:var(--bg-primary);position:relative;overflow:hidden;flex-shrink:0;display:flex;flex-direction:column;}
+.ticker-bar{background:var(--header-bg);color:#E8EEF5;font-family:'JetBrains Mono',monospace;font-size:12.5px;padding:8px 20px;display:flex;align-items:center;gap:32px;flex-shrink:0;white-space:nowrap;overflow:hidden;letter-spacing:0.02em;}
+.ticker-item{display:flex;align-items:center;gap:6px;}
+.ticker-label{color:#8899AA;font-size:11px;}
+.ticker-sep{color:#3A4A5E;font-size:14px;}
+.tick-up{color:#4CD964;}.tick-down{color:#FF6B6B;}.tick-neutral{color:#FFD060;}
+.slide-header{background:var(--header-bg);padding:14px 48px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;border-bottom:3px solid var(--accent-amber);}
+.slide-number{font-family:'JetBrains Mono',monospace;color:#8899AA;font-size:13px;letter-spacing:0.1em;}
+.slide-title{font-family:'Noto Serif JP',serif;font-weight:900;font-size:30px;color:#FFFFFF;letter-spacing:0.04em;}
+.slide-period{font-family:'JetBrains Mono',monospace;color:#7AAACF;font-size:13px;}
+.slide-body{flex:1;padding:28px 48px 24px;display:flex;flex-direction:column;justify-content:space-between;overflow-y:auto;}
+.slide-footer{background:var(--bg-secondary);border-top:1px solid var(--border-light);padding:7px 48px;display:flex;justify-content:space-between;align-items:center;flex-shrink:0;}
+.footer-text{font-size:12px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;}
+.section-title{font-family:'Noto Serif JP',serif;font-weight:700;font-size:24px;color:var(--text-primary);border-left:4px solid var(--accent-blue);padding-left:12px;margin-bottom:14px;}
+.section-subtitle{font-size:16px;font-weight:600;color:var(--text-secondary);margin-bottom:10px;border-bottom:1px solid var(--border-light);padding-bottom:5px;}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px;flex:1;}
+.card-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;flex:1;}
+.card-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;flex:1;}
+.insight-items{display:flex;flex-direction:column;gap:10px;flex:1;}
+.data-table{width:100%;border-collapse:collapse;font-size:13.5px;}
+.data-table th{background:var(--header-bg);color:#FFFFFF;padding:10px 14px;text-align:left;font-size:13px;font-weight:600;white-space:nowrap;}
+.data-table td{padding:9px 14px;border-bottom:1px solid var(--border-light);vertical-align:top;line-height:1.45;font-size:13.5px;}
+.data-table tr:nth-child(even) td{background:var(--bg-secondary);}
+.data-table tr:hover td{background:var(--bg-tertiary);}
+.data-table td:first-child{font-weight:600;color:var(--text-secondary);}
+.risk-table{width:100%;border-collapse:collapse;font-size:13px;}
+.risk-table th{background:#1A2A40;color:#D0DDE8;padding:9px 12px;text-align:left;font-size:12px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;}
+.risk-table td{padding:10px 12px;border-bottom:1px solid var(--border-light);vertical-align:top;line-height:1.5;}
+.risk-table tr:nth-child(even) td{background:var(--bg-secondary);}
+.card{background:var(--bg-secondary);border-radius:8px;border:1px solid var(--border-light);padding:16px 20px;display:flex;flex-direction:column;gap:8px;}
+.card-title{font-size:14.5px;font-weight:700;color:var(--text-primary);border-bottom:1px solid var(--border-light);padding-bottom:7px;display:flex;align-items:center;gap:6px;}
+.card-body{font-size:13px;color:var(--text-secondary);line-height:1.6;}
+.insight-item{background:var(--bg-secondary);border-radius:6px;border-left:4px solid var(--accent-blue);padding:12px 16px;font-size:13px;line-height:1.6;color:var(--text-secondary);}
+.insight-item strong{color:var(--text-primary);font-weight:700;}
+.cal-item{background:var(--bg-secondary);border-radius:6px;border:1px solid var(--border-light);padding:12px 16px;display:flex;flex-direction:column;gap:4px;}
+.cal-date{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent-blue);font-weight:600;text-transform:uppercase;letter-spacing:0.05em;}
+.cal-event{font-size:14.5px;font-weight:700;color:var(--text-primary);}
+.cal-detail{font-size:12.5px;color:var(--text-muted);line-height:1.5;}
+.cal-reaction{font-size:12px;color:var(--text-secondary);margin-top:4px;border-top:1px dashed var(--border-light);padding-top:4px;line-height:1.4;}
+.tag{display:inline-block;padding:2px 8px;border-radius:3px;font-size:12px;font-weight:600;font-family:'JetBrains Mono',monospace;}
+.tag-red{background:#FDECEA;color:var(--accent-red);border:1px solid #F5C6C2;}
+.tag-amber{background:#FFF3E0;color:var(--accent-amber);border:1px solid #FFCC80;}
+.tag-green{background:#E8F5E9;color:var(--accent-green);border:1px solid #A5D6A7;}
+.tag-blue{background:#E3F2FD;color:var(--accent-blue);border:1px solid #90CAF9;}
+.prob-high{background:#FDECEA;color:var(--accent-red);font-weight:700;font-family:'JetBrains Mono',monospace;text-align:center;border-radius:4px;padding:2px 6px;font-size:12px;display:inline-block;}
+.prob-mid{background:#FFF3E0;color:var(--accent-amber);font-weight:700;font-family:'JetBrains Mono',monospace;text-align:center;border-radius:4px;padding:2px 6px;font-size:12px;display:inline-block;}
+.prob-low{background:#E8F5E9;color:var(--accent-green);font-weight:700;font-family:'JetBrains Mono',monospace;text-align:center;border-radius:4px;padding:2px 6px;font-size:12px;display:inline-block;}
+.mono{font-family:'JetBrains Mono',monospace;font-size:13px;}
+.up{color:var(--accent-green);font-weight:600;}
+.down{color:var(--accent-red);font-weight:600;}
+.neutral{color:var(--accent-amber);font-weight:600;}
+.impact-high{color:var(--accent-red);font-size:14px;}
+.impact-mid{color:var(--accent-amber);font-size:14px;}
+.impact-low{color:var(--accent-green);font-size:14px;}
+.thesis-hero{background:linear-gradient(135deg,#0A1628 0%,#1E3A5F 100%);color:#FFFFFF;border-radius:10px;padding:20px 30px;display:flex;flex-direction:column;gap:8px;flex-shrink:0;}
+.thesis-hero .hero-label{font-family:'JetBrains Mono',monospace;color:#7AAACF;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;}
+.thesis-hero .hero-text{font-family:'Noto Serif JP',serif;font-weight:900;font-size:30px;line-height:1.35;color:#FFD060;}
+.thesis-narrative{display:flex;flex-direction:column;justify-content:space-between;gap:12px;flex:1;margin-top:14px;}
+.narr-block{padding:2px 0 2px 18px;border-left:3px solid var(--accent-blue);}
+.narr-block.block-events{border-left-color:var(--accent-blue);}
+.narr-block.block-markets{border-left-color:var(--accent-amber);}
+.narr-block.block-questions{border-left-color:var(--header-bg);}
+.narr-title{font-family:'Noto Serif JP',serif;font-weight:700;font-size:17px;color:var(--text-primary);margin-bottom:6px;letter-spacing:0.05em;}
+.narr-body{font-family:'Noto Sans JP',sans-serif;font-size:15.5px;line-height:1.85;color:var(--text-secondary);font-weight:400;}
+.keynum-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+.keynum{background:var(--bg-secondary);border:1px solid var(--border-light);border-radius:6px;padding:10px 14px;display:flex;flex-direction:column;gap:2px;}
+.keynum-label{font-size:11px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;letter-spacing:0.05em;text-transform:uppercase;}
+.keynum-value{font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;color:var(--text-primary);}
+.keynum-delta{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     SLIDE 1: 週間テーゼ（冒頭2-3分読み上げスクリプト）
+============================================================ -->
+<div class="scale-outer"><div class="slide">
+  <div class="ticker-bar">
+    <span class="ticker-item"><span class="ticker-label">S&P500</span><span class="tick-up">7,173.91 (+2.96%)</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">NIKKEI</span><span class="tick-up">60,537 (ATH)</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">GOLD</span><span class="tick-neutral">$4,681</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">WTI</span><span class="tick-up">$96.68</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">USD/JPY</span><span class="tick-neutral">159.17</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">10Y UST</span><span class="tick-up">4.32%</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">BTC</span><span class="tick-neutral">$79K</span></span>
+  </div>
+  <div class="slide-header">
+    <span class="slide-number">01 / 09</span>
+    <span class="slide-title">週間テーゼ — ホルムズ封鎖下の最高値</span>
+    <span class="slide-period">2026.04.14 – 04.27</span>
+  </div>
+  <div class="slide-body">
+    <div class="thesis-hero">
+      <span class="hero-label">◆ 週間テーゼ ／ WEEKLY OPENING</span>
+      <div class="hero-text">「ホルムズ封鎖下の最高値 — 市場は&quot;戦時の常態化&quot;を価格にし始めた」</div>
+    </div>
+    <div class="thesis-narrative">
+      <div class="narr-block block-events">
+        <div class="narr-title">今週の世界</div>
+        <div class="narr-body">
+          米イラン戦争は九週目に入った。四月二十一日、トランプ大統領は停戦の延長を発表。一方で米軍によるホルムズ海峡封鎖は維持された。直後の二十二日、イランは同海峡で商船三隻を攻撃し、和平協議は事実上停止した。原油は一バレル九十一ドル前後から九十七ドル近辺へ再上昇。四月十日発表の三月米CPIはエネルギー主導で前年比3.3パーセントへ加速した。日銀は二十六日からの会合で利上げを見送り、その翌日、日経平均は初めて六万円台で終値を記録した。
+        </div>
+      </div>
+      <div class="narr-block block-markets">
+        <div class="narr-title">市場の反応</div>
+        <div class="narr-body">
+          S&amp;P500は二週間で2.96パーセント上昇し、終値で七千百七十三を超え連日の最高値を更新。日経平均も六万五百三十七で史上初の六万円台に乗せた。一方で米十年債利回りは4.32パーセントへ0.07パーセントポイント上昇。長期金利は再び4.3パーセント台に張り付く。原油は九十六ドル台、金は一オンス四千六百八十一ドル付近で高止まり。ドル円は159円台で膠着。株価最高値とインフレヘッジ資産の同時上昇は、市場が&quot;戦時の常態化&quot;を価格に織り込み始めたサインに見える。
+        </div>
+      </div>
+      <div class="narr-block block-questions">
+        <div class="narr-title">投資家への問い</div>
+        <div class="narr-body">
+          世界はいま、二つの仮説に静かに同意し始めている。第一に「ホルムズ封鎖はもはや恒常化し、織り込み済み」。第二に「戦時の最高値は政策の追い風で崩れない」。だが、どちらも一度も否定されないまま、市場の床になっている。あなたのポートフォリオで、エネルギーの高止まりに対するヘッジ比率は、二月の開戦時点から本当に変わっただろうか。現金比率の据え置きは、判断の結果か、それとも惰性か。四月二十九日のFOMC、五月八日の四月雇用統計、その朝に最高値の支柱がきしんだとき、あなたはこの問いを思い出すだろうか。
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="footer-text">Sources: CNBC / Reuters / FRED / BLS / BOJ / Treasury (Tier1/2交差検証済)</span>
+    <span class="footer-text">GLOBAL MACRO DIGEST ● 2026.04.27</span>
+  </div>
+</div></div>
+
+<!-- ============================================================
+     SLIDE 2: マクロ・地政学マトリクス
+============================================================ -->
+<div class="scale-outer"><div class="slide">
+  <div class="ticker-bar">
+    <span class="ticker-item"><span class="ticker-label">FOMC 4/29</span><span class="tick-neutral">PENDING</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">ECB 4/30</span><span class="tick-neutral">HOLD想定</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">BOJ 4/27</span><span class="tick-neutral">HOLD</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">CPI YoY</span><span class="tick-down">+3.3%</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">NFP</span><span class="tick-up">+178K</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">UE</span><span class="tick-neutral">4.3%</span></span>
+  </div>
+  <div class="slide-header">
+    <span class="slide-number">02 / 09</span>
+    <span class="slide-title">🌐 マクロ・地政学マトリクス</span>
+    <span class="slide-period">2026.04.14 – 04.27</span>
+  </div>
+  <div class="slide-body">
+    <table class="data-table" style="flex-grow:1;">
+      <thead><tr><th style="width:20%">項目</th><th style="width:40%">動向</th><th style="width:18%">市場インパクト</th><th style="width:22%">シグナル</th></tr></thead>
+      <tbody>
+        <tr><td>FRB（Powell最後のFOMC）</td><td>4/28-29 政策金利据え置き濃厚（IORB 3.65%）。3月議事要旨で大半の委員が「インフレ低下が想定より遅い」と指摘。Powell退任直前で慎重トーン。</td><td><span class="impact-high">🔴高</span></td><td><span class="tag tag-amber">⚖️中立</span> ハト派余地は限定</td></tr>
+        <tr><td>ECB（Lagarde）</td><td>4/30 据え置きが市場織り込み。ユーロ圏3月CPI 2.6%（エネルギー主導）。6月利上げを織り込みつつあるが、ドイツGDP予想は+1.3%→+0.5%に下方修正。</td><td><span class="impact-mid">🟡中</span></td><td><span class="tag tag-red">📉景気弱気</span></td></tr>
+        <tr><td>BOJ（Ueda）</td><td>4/26-27 据え置き、6月利上げで1.0%到達がコンセンサス（エコノミスト2/3）。Ueda議長は4/17講演で利上げシグナルを抑制。中東不安が利上げ先延ばし要因。</td><td><span class="impact-mid">🟡中</span></td><td><span class="tag tag-amber">⚖️中立寄りタカ</span></td></tr>
+        <tr><td>米3月CPI（4/10発表）</td><td>前年比3.3%（前回2.4%→大幅再加速）、前月比+0.9%。エネルギー+10.9%、ガソリン+21.2%。Iran戦争開始後の初CPIでインフレショック確認。</td><td><span class="impact-high">🔴高</span></td><td><span class="tag tag-red">📉インフレ再燃</span></td></tr>
+        <tr><td>米3月雇用統計（4/3発表）</td><td>NFP+178K（2024年12月以来最大）、失業率4.3%維持、ヘルスケア・建設・運輸でリード。連邦政府雇用は引き続き減少。</td><td><span class="impact-mid">🟡中</span></td><td><span class="tag tag-green">📈雇用堅調</span></td></tr>
+        <tr><td>イラン戦争／ホルムズ危機</td><td>戦争9週目突入。4/21停戦延長 → 4/22イランが同海峡で商船3隻攻撃 → 米軍封鎖継続。Iranがパキスタン経由で新提案を提示するも会談決裂。IEAは「過去最大級のエネルギー供給ショック」と評価。</td><td><span class="impact-high">🔴高</span></td><td><span class="tag tag-red">📉地政学テール</span></td></tr>
+        <tr><td>ドイツ経済成長見通し</td><td>独政府が2026年GDP予想を半減。+1.3%→+0.5%、2027年も+1.3%→+0.9%。エネルギー価格上昇と外需鈍化が直撃。</td><td><span class="impact-mid">🟡中</span></td><td><span class="tag tag-red">📉欧州景気</span></td></tr>
+        <tr><td>株式リスク資産フロー</td><td>米株：S&amp;P500・Nasdaq連日最高値。日本株：日経60,000突破。一方で欧州株は週次-2〜-3%下落（ドイツ景気下方修正・エネルギーコスト）。</td><td><span class="impact-high">🔴高</span></td><td><span class="tag tag-amber">⚖️リスクオン継続</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="slide-footer">
+    <span class="footer-text">Sources: BLS / FRED / ECB / BOJ / CNBC / Reuters / IEA</span>
+    <span class="footer-text">GLOBAL MACRO DIGEST ● 2026.04.27</span>
+  </div>
+</div></div>
+
+<!-- ============================================================
+     SLIDE 3: 株式マーケットスコアカード
+============================================================ -->
+<div class="scale-outer"><div class="slide">
+  <div class="ticker-bar">
+    <span class="ticker-item"><span class="ticker-label">S&P500</span><span class="tick-up">+2.96%</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">NDX</span><span class="tick-up">ATH</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">N225</span><span class="tick-up">60,537 ATH</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">TOPIX</span><span class="tick-up">3,735</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">DAX</span><span class="tick-down">-2.32%/wk</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">FTSE</span><span class="tick-down">-2.70%/wk</span></span>
+  </div>
+  <div class="slide-header">
+    <span class="slide-number">03 / 09</span>
+    <span class="slide-title">📊 株式スコアカード — 米日最高値／欧州下落</span>
+    <span class="slide-period">2026.04.14 – 04.27</span>
+  </div>
+  <div class="slide-body">
+    <div class="two-col">
+      <div>
+        <div class="section-subtitle">主要株価指数（期間始値→終値）</div>
+        <table class="data-table">
+          <thead><tr><th>指数</th><th>始(4/14)→終(4/27)</th><th>変動</th><th>備考</th></tr></thead>
+          <tbody>
+            <tr><td>S&amp;P 500</td><td class="mono">6,967.38 → 7,173.91</td><td class="mono up">▲ +2.96%</td><td>連日ATH更新</td></tr>
+            <tr><td>NASDAQ 100</td><td class="mono">— → ATH</td><td class="mono up">▲ AI半導体主導</td><td>4/27終値で史上最高値<span class="tag tag-blue">データ確認中</span></td></tr>
+            <tr><td>Russell 2000</td><td class="mono">—</td><td class="mono neutral">—</td><td><span class="tag tag-blue">データ確認中</span> 高金利で重い</td></tr>
+            <tr><td>Nikkei 225</td><td class="mono">~59,716 → 60,537.36</td><td class="mono up">▲ +約1.4%</td><td>4/27 史上初の60,000円台終値</td></tr>
+            <tr><td>TOPIX</td><td class="mono">3,735.28 (4/27)</td><td class="mono up">▲ +0.50%（4/27単日）</td><td>金融・商社主導</td></tr>
+            <tr><td>DAX 40</td><td class="mono">週次変動</td><td class="mono down">▼ -2.32%（直近一週）</td><td>独GDP予想下方修正</td></tr>
+            <tr><td>FTSE 100</td><td class="mono">週次変動</td><td class="mono down">▼ -2.70%（直近一週）</td><td>原油高でディフェンシブのみ底堅い</td></tr>
+            <tr><td>CAC 40</td><td class="mono">週次変動</td><td class="mono down">▼ -3.17%（直近一週）</td><td>欧州最大の下げ幅</td></tr>
+            <tr><td>FTSE MIB（伊）</td><td class="mono">週次変動</td><td class="mono down">▼ -2.48%（直近一週）</td><td>欧州売り共通</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div class="section-subtitle">セクター・ファクター動向</div>
+        <div class="insight-items">
+          <div class="insight-item" style="border-left-color:var(--accent-green)"><strong>AI半導体・大型テック：</strong>Nasdaqを最高値に押し上げた主役。AI データセンター需要が地政学不確実性を上書き。<span class="tag tag-green">🔥継続</span></div>
+          <div class="insight-item"><strong>ディフェンシブ（公益・通信）：</strong>欧州市場の唯一の安全地帯。Hormuz閉鎖継続で景気敏感売り→ディフェンシブ買い。</div>
+          <div class="insight-item" style="border-left-color:var(--accent-red)"><strong>EV・Tesla：</strong>Q1決算後にCapEx $25B（前回計画$20B）へ上方修正、free cash flow年内マイナス予告。株価4/23に-3.7%、年初来-17%。<span class="tag tag-red">⚡一時/構造性混在</span></div>
+          <div class="insight-item"><strong>Value vs Growth：</strong>米はGrowth優勢継続（AI半導体）、欧州は資本財・自動車中心にValue売り。日本はバリュー・銀行が日経押し上げ寄与。</div>
+          <div class="insight-item" style="border-left-color:var(--accent-amber)"><strong>因果メモ：</strong>米日の最高値と欧州の下落が同時進行。Iran/エネルギー耐性の差（軍事プレゼンス・エネルギー輸入依存度）がリスクプレミアム差として顕在化。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="footer-text">Sources: CNBC / Yahoo Finance / Nippon.com / Reuters / Trading Economics</span>
+    <span class="footer-text">GLOBAL MACRO DIGEST ● 2026.04.27</span>
+  </div>
+</div></div>
+
+<!-- ============================================================
+     SLIDE 4: 債券・金利
+============================================================ -->
+<div class="scale-outer"><div class="slide">
+  <div class="ticker-bar">
+    <span class="ticker-item"><span class="ticker-label">10Y UST</span><span class="tick-up">4.32% (+7bps/wk)</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">2Y UST</span><span class="tick-neutral">~3.83%</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">10Y-2Y</span><span class="tick-up">+50bps</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">10Y JGB</span><span class="tick-up">~2.45%</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">HY OAS</span><span class="tick-neutral">2.84%</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">IG OAS</span><span class="tick-neutral">~80bps</span></span>
+  </div>
+  <div class="slide-header">
+    <span class="slide-number">04 / 09</span>
+    <span class="slide-title">📊 債券・金利 — Bear Steepenerと25年来タイトのスプレッド</span>
+    <span class="slide-period">2026.04.14 – 04.27</span>
+  </div>
+  <div class="slide-body">
+    <div class="two-col">
+      <div>
+        <div class="section-subtitle">米国債利回り・カーブ・スプレッド</div>
+        <table class="data-table">
+          <thead><tr><th>項目</th><th>水準</th><th>変動</th><th>含意</th></tr></thead>
+          <tbody>
+            <tr><td>10Y UST</td><td class="mono">4.32%</td><td class="mono up">▲ +7bps（週次）</td><td>Iran封鎖／インフレ再燃で長期金利上昇圧力</td></tr>
+            <tr><td>2Y UST</td><td class="mono">~3.83%（4/23）</td><td class="mono neutral">FOMC待ち</td><td>FF金利据え置き織り込み</td></tr>
+            <tr><td>30Y UST</td><td class="mono">推定 ~4.65–4.75%</td><td class="mono up">▲ Bear Steepener継続</td><td><span class="tag tag-blue">データ確認中</span> 財政プレミアム拡大</td></tr>
+            <tr><td>10Y-2Y スプレッド</td><td class="mono">+50bps前後</td><td class="mono up">▲ 4月中旬+54bps到達</td><td>27ヶ月の逆イールド解消後の構造的Steepening</td></tr>
+            <tr><td>10Y JGB</td><td class="mono">~2.45%</td><td class="mono up">▲ 2.0%超え定着</td><td>BOJ利上げ織り込みでJGB売り</td></tr>
+            <tr><td>HY OAS（ICE BofA）</td><td class="mono">2.84%</td><td class="mono neutral">タイト圏維持</td><td>戦時下にもかかわらずクレジット楽観</td></tr>
+            <tr><td>IG OAS（ICE BofA）</td><td class="mono">~80bps</td><td class="mono neutral">25年来タイト</td><td>BBB ~100bps、AI関連起債トレンド継続</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div class="section-subtitle">金利・クレジットの読み解き</div>
+        <div class="insight-items">
+          <div class="insight-item" style="border-left-color:var(--accent-red)"><strong>Bear Steepener：</strong>過去のSteepenerは利下げ期待発の「Bull Steepener」だった。今回は長期金利が短期より速く上昇する「Bear Steepener」。インフレ・財政・地政学プレミアムの三重蓄積を反映。</div>
+          <div class="insight-item"><strong>HY OAS 2.84%の不可思議：</strong>イラン戦争9週目、CPIインフレ再燃のなかで信用スプレッドはタイト圏。市場は「いずれ正常化する」前提を信じている。割安／割高どちらか — それを問うこと自体が今週のテーマ。</div>
+          <div class="insight-item" style="border-left-color:var(--accent-amber)"><strong>日米金利差：</strong>10Y UST 4.32% vs 10Y JGB 2.45% で約187bps。BOJ利上げ織り込みで縮小傾向だが、ドル円は159円台に張り付き、利差以外の要因（日本実質金利・キャリー）が支配的。</div>
+          <div class="insight-item" style="border-left-color:var(--accent-blue)"><strong>4/29 FOMCの注目点：</strong>Powell最後の会見。ハト派色か、インフレへの警戒強化か。30Y長期金利の反応がBear Steepener継続/反転の分岐点。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="footer-text">Sources: Treasury.gov / FRED (BAMLH0A0HYM2, T10Y2Y) / Trading Economics / MUFG</span>
+    <span class="footer-text">GLOBAL MACRO DIGEST ● 2026.04.27</span>
+  </div>
+</div></div>
+
+<!-- ============================================================
+     SLIDE 5: FX・コモディティ
+============================================================ -->
+<div class="scale-outer"><div class="slide">
+  <div class="ticker-bar">
+    <span class="ticker-item"><span class="ticker-label">USD/JPY</span><span class="tick-neutral">159.17</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">EUR/USD</span><span class="tick-up">~1.17</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">DXY</span><span class="tick-down">98.47 (-2%/月)</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">WTI</span><span class="tick-up">$96.68</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">GOLD</span><span class="tick-neutral">$4,681</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">COPPER</span><span class="tick-neutral">$6/lb</span></span>
+  </div>
+  <div class="slide-header">
+    <span class="slide-number">05 / 09</span>
+    <span class="slide-title">💱 FX & コモディティ — エネルギーが秤を傾ける</span>
+    <span class="slide-period">2026.04.14 – 04.27</span>
+  </div>
+  <div class="slide-body">
+    <div class="two-col">
+      <div>
+        <div class="section-subtitle">FX・通貨</div>
+        <table class="data-table">
+          <thead><tr><th>通貨ペア</th><th>水準</th><th>動向</th><th>注釈</th></tr></thead>
+          <tbody>
+            <tr><td>USD/JPY</td><td class="mono">159.17</td><td class="mono neutral">▶ 膠着</td><td>日銀据え置きでも明確な円高入らず</td></tr>
+            <tr><td>EUR/USD</td><td class="mono">~1.17</td><td class="mono up">▲ ドル弱含み</td><td>1.13–1.22レンジ想定（Fed-ECB乖離）</td></tr>
+            <tr><td>GBP/USD</td><td class="mono">—</td><td class="mono neutral">—</td><td><span class="tag tag-blue">データ確認中</span></td></tr>
+            <tr><td>DXY</td><td class="mono">98.47</td><td class="mono down">▼ -2.03%（30日）</td><td>高金利でも資金流入鈍い → 米独自リスクプレミアム</td></tr>
+          </tbody>
+        </table>
+        <div class="section-subtitle" style="margin-top:14px;">コモディティ</div>
+        <table class="data-table">
+          <thead><tr><th>銘柄</th><th>水準</th><th>動向</th><th>備考</th></tr></thead>
+          <tbody>
+            <tr><td>WTI原油</td><td class="mono">$96.68/bbl</td><td class="mono up">▲ +2.42%（4/27単日）</td><td>4月内 $91→$97。Goldman: Brent Q4平均$90予想</td></tr>
+            <tr><td>金</td><td class="mono">$4,681.85/oz</td><td class="mono down">▼ -0.58%（4/27）</td><td>$4,700一時超え。戦時ヘッジ需要</td></tr>
+            <tr><td>銀</td><td class="mono">$76+/oz</td><td class="mono up">▲ 4/27反転</td><td>Iran新提案報道で買い戻し</td></tr>
+            <tr><td>銅</td><td class="mono">~$6/lb</td><td class="mono neutral">▶ 横ばい</td><td>エネルギー高でインフレ圧迫の傍観</td></tr>
+            <tr><td>鉄鉱石</td><td class="mono">$105.14/T</td><td class="mono up">▲ 1月以来高値</td><td>4週間+5.08%</td></tr>
+            <tr><td>天然ガス</td><td class="mono">$2.58/MMBtu</td><td class="mono down">▼ -10.81%（30日）</td><td>暖冬・北米供給で軟化</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div class="section-subtitle">通貨・コモディティの含意</div>
+        <div class="insight-items">
+          <div class="insight-item" style="border-left-color:var(--accent-red)"><strong>DXY -2%／株最高値という稀な組み合わせ：</strong>米高金利・ドル弱・株高 = 米独自リスクプレミアム上昇の暗示。財政懸念とIran関与コストが反映されている可能性。</div>
+          <div class="insight-item"><strong>キャリートレード：</strong>USD/JPY 159円台で円キャリーは生存。ただしBOJ 6月利上げが現実化すれば、巻き戻しリスク（ボルマゲドンの予告編）。</div>
+          <div class="insight-item" style="border-left-color:var(--accent-amber)"><strong>WTI $115→$97の一服：</strong>停戦延長で投機ピークアウト。だがホルムズ閉鎖は継続→IEAは「過去最大級の供給ショック」と位置付ける。下値抵抗は$85前後（Goldman想定）。</div>
+          <div class="insight-item" style="border-left-color:var(--accent-green)"><strong>金 $4,681の意味：</strong>株最高値と同時に金も高値圏。「分散」ではなく「同方向ヘッジ」として両方買われている。中央銀行買い・実質金利低下期待が支柱。</div>
+          <div class="insight-item"><strong>新興国通貨：</strong>原油安定で通商赤字国（インド・トルコ・南ア）一服。しかしDXY弱で資金フローはまだら模様<span class="tag tag-blue">データ確認中</span>。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="footer-text">Sources: Federal Reserve H.10 / BOJ FX / Trading Economics / Bloomberg / Fortune</span>
+    <span class="footer-text">GLOBAL MACRO DIGEST ● 2026.04.27</span>
+  </div>
+</div></div>
+
+<!-- ============================================================
+     SLIDE 6: 暗号資産 + クロスアセット・インサイト
+============================================================ -->
+<div class="scale-outer"><div class="slide">
+  <div class="ticker-bar">
+    <span class="ticker-item"><span class="ticker-label">BTC</span><span class="tick-neutral">$79K</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">ETH</span><span class="tick-down">$2,320</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">BTC ETF（4月）</span><span class="tick-up">+$2.43B inflow</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">VIX</span><span class="tick-neutral">~19</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">10Y-2Y</span><span class="tick-up">+50bps</span></span>
+  </div>
+  <div class="slide-header">
+    <span class="slide-number">06 / 09</span>
+    <span class="slide-title">🪙 暗号資産＋🔬 クロスアセット・インサイト</span>
+    <span class="slide-period">2026.04.14 – 04.27</span>
+  </div>
+  <div class="slide-body">
+    <div class="two-col">
+      <div>
+        <div class="section-subtitle">暗号資産</div>
+        <table class="data-table">
+          <thead><tr><th>項目</th><th>水準</th><th>動向</th><th>備考</th></tr></thead>
+          <tbody>
+            <tr><td>Bitcoin</td><td class="mono">~$79,000</td><td class="mono up">▲ 4/27 +1.4%</td><td>FOMC・Iran平和待ちでレンジ</td></tr>
+            <tr><td>Ethereum</td><td class="mono">$2,320–$2,370</td><td class="mono down">▼ 寄付き後反落</td><td>BTC優位、ETH比は劣後</td></tr>
+            <tr><td>BTC ETF月次</td><td class="mono">+$2.43B（4月累計）</td><td class="mono up">▲ 年初来プラス転換</td><td>BlackRock IBIT 1日$167.5M首位</td></tr>
+            <tr><td>ETH ETF週次</td><td class="mono">+$187M（4/10週）</td><td class="mono up">▲ 2026年最強</td><td>オンチェーン活動 +41% w/w</td></tr>
+            <tr><td>マクロ相関</td><td colspan="3">Iran地政学＋FOMC接近で相関は中立化。BTCはゴールドより株式に近い動きを継続。</td></tr>
+          </tbody>
+        </table>
+        <div class="section-subtitle" style="margin-top:12px;">VIX・ボラティリティ</div>
+        <div class="card" style="background:#FFF3E0;border-color:#FFCC80;">
+          <div class="card-title">VIX 17→19+ レンジ</div>
+          <div class="card-body">4/13に19.5+へ急上昇（Iran和平決裂時）、その後17台で安定→4/22停戦延長期限前後で再上昇。MOVE指数（債券ボラ）も金利急変リスクを警戒。VIX 20割れの「フェイク・カーム」を疑う声が増えつつある。</div>
+        </div>
+      </div>
+      <div>
+        <div class="section-subtitle">🔬 クロスアセット・インサイト（5点）</div>
+        <div class="insight-items">
+          <div class="insight-item" style="border-left-color:var(--accent-blue)"><strong>① 株最高値＋金高値の同時進行：</strong>「分散」ではなく「両方向ヘッジ」が同時に買われている異例の構図。市場は&quot;戦時の常態化シナリオ&quot;と&quot;Fed緩和シナリオ&quot;の両方を別ポケットに買っている。</div>
+          <div class="insight-item" style="border-left-color:var(--accent-amber)"><strong>② Bear Steepener × DXY弱：</strong>金利上昇でドル買いが起きない異常。米財政プレミアム＆Iran介入コストの織り込みを示唆する弱気シグナル。</div>
+          <div class="insight-item" style="border-left-color:var(--accent-red)"><strong>③ HY OAS 2.84%の沈黙：</strong>戦争9週目・CPI 3.3%でクレジットスプレッドは25年来タイト圏。逆張りシグナルの教科書例。</div>
+          <div class="insight-item" style="border-left-color:var(--accent-green)"><strong>④ Tesla CapEx ショック：</strong>AIキャペックス膨張で他のMag7（4/29-30決算）にも警戒色。AI投資の「収益化遅れ」が市場テーマに昇格しつつある。</div>
+          <div class="insight-item" style="border-left-color:var(--accent-blue)"><strong>⑤ 日本独走：</strong>日経60,000円・10Y JGB 2.45%・USD/JPY 159円。トリプル変動＝BOJタカ派化＋海外資金流入＋円安バリュエーション補正。6月会合まで「なぜ最高値か」を疑問視する余白が残る。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="footer-text">Sources: Yahoo Finance / CoinDesk / Coinglass / Cboe / FRED (VIXCLS)</span>
+    <span class="footer-text">GLOBAL MACRO DIGEST ● 2026.04.27</span>
+  </div>
+</div></div>
+
+<!-- ============================================================
+     SLIDE 7: セクター・テーマ熱量
+============================================================ -->
+<div class="scale-outer"><div class="slide">
+  <div class="ticker-bar">
+    <span class="ticker-item"><span class="ticker-label">HOT</span><span class="tick-up">AI半導体</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">HOT</span><span class="tick-up">貴金属</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">HOT</span><span class="tick-up">日本バリュー</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">COLD</span><span class="tick-down">EV/Tesla</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">COLD</span><span class="tick-down">欧州景気循環</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">COLD</span><span class="tick-down">米中型株</span></span>
+  </div>
+  <div class="slide-header">
+    <span class="slide-number">07 / 09</span>
+    <span class="slide-title">🔥 セクター・テーマ熱量 — Mag7決算ウィーク前夜</span>
+    <span class="slide-period">2026.04.14 – 04.27</span>
+  </div>
+  <div class="slide-body">
+    <div class="card-grid-3" style="margin-bottom:16px;">
+      <div class="card" style="border-left:4px solid var(--accent-green);">
+        <div class="card-title">🔥 #1 AI半導体・大型テック</div>
+        <div class="card-body"><strong>動いた理由：</strong>AI データセンター需要が地政学不安を上書き。Nasdaq連日ATH。<br><strong>持続性：</strong><span class="tag tag-green">🔥継続</span> 4/29 Microsoft・Meta・Alphabet・Amazon決算が決定打。<br><strong>裏のリスク：</strong>Tesla式のCapEx膨張（収益化未達）が他社にも露呈すれば一気にリプライス。</div>
+      </div>
+      <div class="card" style="border-left:4px solid var(--accent-green);">
+        <div class="card-title">🔥 #2 貴金属（金・銀）</div>
+        <div class="card-body"><strong>動いた理由：</strong>Iran戦時インフレ＋実質金利低下期待＋中銀買い。<br><strong>持続性：</strong><span class="tag tag-green">🔥継続</span> 株最高値と同時上昇は&quot;分散&quot;ではなく&quot;同方向ヘッジ&quot;を示唆。<br><strong>裏のリスク：</strong>Fedタカ派サプライズで実質金利上振れ → 短期下落圧力。</div>
+      </div>
+      <div class="card" style="border-left:4px solid var(--accent-green);">
+        <div class="card-title">🔥 #3 日本株（バリュー・銀行）</div>
+        <div class="card-body"><strong>動いた理由：</strong>日経60,000突破。海外資金流入＋BOJ慎重スタンス＋業績期待。<br><strong>持続性：</strong><span class="tag tag-amber">⚡条件付き</span> 6月BOJ利上げが本格化すれば円急騰→輸出株重し。<br><strong>裏のリスク：</strong>USD/JPY 155割れシナリオでバリュエーション巻き戻し。</div>
+      </div>
+    </div>
+    <div class="card-grid-3" style="margin-bottom:16px;">
+      <div class="card" style="border-left:4px solid var(--accent-red);">
+        <div class="card-title">❄️ Worst #1 EV / Tesla</div>
+        <div class="card-body"><strong>下げた理由：</strong>Q1 EPS 41¢ vs 37¢ beat も、CapEx $25B（前回$20B）へ上方修正で年内FCFマイナス予告。<br><strong>性質：</strong><span class="tag tag-red">構造的</span> AIロボティクス転換コストは構造変化。<br>4/23 -3.7% / YTD -17%。</div>
+      </div>
+      <div class="card" style="border-left:4px solid var(--accent-red);">
+        <div class="card-title">❄️ Worst #2 欧州景気循環</div>
+        <div class="card-body"><strong>下げた理由：</strong>独GDP予想下方修正＋エネルギーコスト＋外需鈍化。DAX/FTSE/CAC週次-2〜-3%。<br><strong>性質：</strong><span class="tag tag-red">構造的</span> 米日との対比が鮮明化。<br>ディフェンシブのみ底堅い。</div>
+      </div>
+      <div class="card" style="border-left:4px solid var(--accent-amber);">
+        <div class="card-title">❄️ Worst #3 米中型株（推定）</div>
+        <div class="card-body"><strong>下げた理由：</strong>10Y 4.32%維持で資金調達コスト圧迫。Russell 2000は引き続き重い見通し。<br><strong>性質：</strong><span class="tag tag-amber">一時的／構造混在</span><br><span class="tag tag-blue">データ確認中</span> 詳細指数。</div>
+      </div>
+    </div>
+    <div>
+      <div class="section-subtitle">注目決算・企業イベント（日米欧）</div>
+      <div class="card-grid-3">
+        <div class="card"><div class="card-title">🇺🇸 Tesla（4/22）</div><div class="card-body">EPS $0.41 (vs $0.37 e) / 売上 $22.39B (vs $22.64B e)。<strong>CapEx $25B</strong>へ上方修正、年内FCFマイナス予告。株価→ $373（-3.7%）。Mag7全体への警戒色。</div></div>
+        <div class="card"><div class="card-title">🇺🇸 Mag7決算ラッシュ</div><div class="card-body">4/29: <strong>Microsoft / Meta / Alphabet / Amazon</strong>。4/30: <strong>Apple</strong>。Mag7全体Q1 EPSコンセンサス +20.3% YoY、売上 +22%。MSFTクラウド成長率の再加速がカギ。</div></div>
+        <div class="card"><div class="card-title">🇯🇵 4月決算ウィーク開始</div><div class="card-body">日経60,000円突破は業績期待を先行織り込み。GW明けの本格決算（5月上中旬）でEPS実績次第。<span class="tag tag-blue">データ確認中</span></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="footer-text">Sources: CNBC / Fortune / TechCrunch / Reuters / Bloomberg</span>
+    <span class="footer-text">GLOBAL MACRO DIGEST ● 2026.04.27</span>
+  </div>
+</div></div>
+
+<!-- ============================================================
+     SLIDE 8: リスクレーダー + フォワードカレンダー
+============================================================ -->
+<div class="scale-outer"><div class="slide">
+  <div class="ticker-bar">
+    <span class="ticker-item"><span class="ticker-label">RISK</span><span class="tick-down">Hormuz恒常化</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">EVENT</span><span class="tick-neutral">FOMC 4/29</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">EVENT</span><span class="tick-neutral">ECB 4/30</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">EVENT</span><span class="tick-neutral">PCE 4/30</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">EVENT</span><span class="tick-neutral">NFP 5/8</span></span>
+  </div>
+  <div class="slide-header">
+    <span class="slide-number">08 / 09</span>
+    <span class="slide-title">⚠️ リスクレーダー & 📅 フォワードカレンダー</span>
+    <span class="slide-period">向こう2週間（〜2026.05.11）</span>
+  </div>
+  <div class="slide-body">
+    <div class="two-col">
+      <div>
+        <div class="section-subtitle">⚠️ テールリスク（5点）</div>
+        <table class="risk-table">
+          <thead><tr><th>リスク</th><th>確率</th><th>影響</th><th>時間軸</th><th>対処の視点</th></tr></thead>
+          <tbody>
+            <tr><td><strong>ホルムズ封鎖恒常化</strong>＋停戦崩壊。供給ショック持続化。</td><td><span class="prob-high">高</span></td><td><span class="prob-high">大</span></td><td>中期</td><td>エネルギーETF・金・米国エネルギー上流の比率を動的に。短期は$120原油想定のヘッジ。</td></tr>
+            <tr><td><strong>FOMC 4/29 タカ派サプライズ</strong>。CPI 3.3%受けてQT再加速・利下げ撤回示唆。</td><td><span class="prob-mid">中</span></td><td><span class="prob-high">大</span></td><td>短期</td><td>30Y長期金利の反応を最優先で見る。Bear Steepenerが急加速ならグロース株売り。</td></tr>
+            <tr><td><strong>BOJ 6月利上げ前倒し</strong>シグナル。USD/JPY急落、JGB急変。</td><td><span class="prob-mid">中</span></td><td><span class="prob-mid">中</span></td><td>短中期</td><td>円キャリー縮小、輸出株の比率調整。USD/JPY 155割れ準備。</td></tr>
+            <tr><td><strong>AI CapEx 疑念連鎖</strong>。Tesla式の説明をMag7他社が踏襲し、AI銘柄リプライス。</td><td><span class="prob-mid">中</span></td><td><span class="prob-high">大</span></td><td>中期</td><td>AI比率の高いポートフォリオはhedgeまたは利益確定。配当・キャッシュフロー銘柄へ部分シフト。</td></tr>
+            <tr><td><strong>欧州景気後退</strong>確認。独GDP+0.5%、ECB追加緩和先送り、ユーロ／輸出株売り。</td><td><span class="prob-mid">中</span></td><td><span class="prob-mid">中</span></td><td>中期</td><td>欧州輸出株オーバーウエイト解消、ユーロ高で輸入関連にシフト。</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div class="section-subtitle">📅 フォワードカレンダー（〜5/11）</div>
+        <div class="insight-items" style="gap:8px;">
+          <div class="cal-item"><div class="cal-date">4/28-29 (Tue-Wed)</div><div class="cal-event">FOMC（Powell最後の会見）</div><div class="cal-detail">FF金利据え置きコンセンサス。SEP（経済予測）改訂なし。Powell退任直前のメッセージ重視。</div><div class="cal-reaction">📈タカ：株-1〜2%、10Y +10bps、ドル高 ／ 📉ハト：株+1%、ゴールド+</div></div>
+          <div class="cal-item"><div class="cal-date">4/29 (Wed) After hours</div><div class="cal-event">Microsoft / Meta / Alphabet / Amazon Q1</div><div class="cal-detail">Mag7決算ウィーク本番。AzureクラウドR/R、Meta CapEx、Alphabet AI投資収益化、Amazon AWS。</div><div class="cal-reaction">クラウド成長↑：Mag7+3%／鈍化：Tesla追随で-3〜5%リプライス</div></div>
+          <div class="cal-item"><div class="cal-date">4/30 (Thu)</div><div class="cal-event">Apple Q1 ／ ECB理事会 ／ 米3月PCE</div><div class="cal-detail">Apple iPhoneサイクル＆AIマネタイゼーション。ECBは据え置き濃厚も6月利上げ示唆あるか。3月PCEはCPI 3.3%との整合性。</div><div class="cal-reaction">PCE > 2.8%：FOMCタカ派余韻拡大、株売り</div></div>
+          <div class="cal-item"><div class="cal-date">5/2 (Fri)</div><div class="cal-event">米4月ISM製造業 ／ 中国財新PMI</div><div class="cal-detail">エネルギー高で製造業マインド悪化リスク。中国は外需指標が中心。</div></div>
+          <div class="cal-item"><div class="cal-date">5/8 (Fri) 8:30 ET</div><div class="cal-event">米4月雇用統計</div><div class="cal-detail">予想NFP +150K前後（コンセンサス未確定）。失業率4.3%維持か。Powell後の利下げ思惑を左右。</div><div class="cal-reaction">下振れ：株+/利下げ織込み、上振れ：Bear Steepener再開</div></div>
+          <div class="cal-item"><div class="cal-date">5/9-10 (Sat-Sun)</div><div class="cal-event">中国4月CPI / PPI</div><div class="cal-detail">デフレ圧力継続か、エネルギー高での反転か。コモディティ・元・新興国通貨に波及。</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="footer-text">Sources: Federal Reserve Calendar / BLS Schedule / ECB / BOJ / Econoday</span>
+    <span class="footer-text">GLOBAL MACRO DIGEST ● 2026.04.27</span>
+  </div>
+</div></div>
+
+<!-- ============================================================
+     SLIDE 9: 上級投資家への示唆 + 免責
+============================================================ -->
+<div class="scale-outer"><div class="slide">
+  <div class="ticker-bar">
+    <span class="ticker-item"><span class="ticker-label">PORTFOLIO</span><span class="tick-neutral">レビュー期</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">HEDGE</span><span class="tick-neutral">エネルギー / 金</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">DURATION</span><span class="tick-neutral">中短期回避</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">CASH</span><span class="tick-neutral">FOMC前判断</span></span>
+  </div>
+  <div class="slide-header">
+    <span class="slide-number">09 / 09</span>
+    <span class="slide-title">💎 上級投資家への示唆</span>
+    <span class="slide-period">2026.04.14 – 04.27</span>
+  </div>
+  <div class="slide-body">
+    <div class="card-grid-3" style="margin-bottom:18px;">
+      <div class="card" style="border-left:4px solid var(--accent-blue);">
+        <div class="card-title">① ポジショニング</div>
+        <div class="card-body">
+          <strong>米株：</strong>S&amp;P最高値だが集中度高。Mag7の決算前に<strong>等加重</strong>へ部分シフト検討。<br><br>
+          <strong>日本株：</strong>日経60,000突破は&quot;円安バリュー補正&quot;の側面。USD/JPY 155割れシナリオで一旦調整想定。バリュー・金融株のチルト維持。<br><br>
+          <strong>欧州株：</strong>景気循環は避け、ディフェンシブ＋エネルギー上流のみ。<br><br>
+          <strong>債券：</strong>Bear Steepener継続なら<strong>1-3Y</strong>へ短期化、<strong>30Y回避</strong>。HY OAS 2.84%は逆張りシグナル — 信用比率上限を見直す。
+        </div>
+      </div>
+      <div class="card" style="border-left:4px solid var(--accent-amber);">
+        <div class="card-title">② リスク管理</div>
+        <div class="card-body">
+          <strong>エネルギーヘッジ：</strong>Hormuz恒常化シナリオで<strong>原油先物・エネルギー株を5-10%</strong>のヘッジレイヤーに配置。<br><br>
+          <strong>金：</strong>ポートフォリオ<strong>3-5%</strong>を継続。実質金利上昇局面ではトリミングするが、構造的Long維持。<br><br>
+          <strong>VIX：</strong>17-19の&quot;フェイク・カーム&quot;対策として<strong>VIXコール／プットスプレッド</strong>を期間1-2ヶ月で構築検討。<br><br>
+          <strong>円キャリー：</strong>BOJ 6月利上げ前倒しに備え、円ショートポジションは段階縮小。
+        </div>
+      </div>
+      <div class="card" style="border-left:4px solid var(--accent-green);">
+        <div class="card-title">③ 中長期（6-12ヶ月）の視点</div>
+        <div class="card-body">
+          <strong>テーマ１：戦時の常態化解除トレード</strong> — Hormuz完全再開（中期シナリオ）で原油急落／景気敏感株反転。Goldmanの$90 Brent（Q4）想定はその一段階。<br><br>
+          <strong>テーマ２：AI CapEx の選別</strong> — Tesla後のMag7決算で「AI投資→収益化」のpath線引きが進む。FCF重視銘柄が再評価。<br><br>
+          <strong>テーマ３：日本リフレ完成</strong> — BOJ利上げ＝デフレ完全脱却。バリュー・銀行・不動産の中期Long仮説。
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="section-subtitle">📌 免責</div>
+      <div class="card" style="background:#FFF3E0;border-color:#FFCC80;">
+        <div class="card-body" style="font-size:12.5px;">本レポートは情報提供を目的としたものであり、特定の金融商品の売買や投資判断を推奨するものではありません。記載された見解は作成時点のものであり、市場環境の変化により予告なく変更される可能性があります。投資判断は最終的にご自身の責任でお願いいたします。データはTier1/2ソース（Treasury.gov / FRED / BLS / ECB / BOJ / CNBC / Reuters / Bloomberg等）から取得・交差検証していますが、一部「データ確認中」と表記した項目は単一ソースに基づく参考値です。</div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="footer-text">Tier1: Treasury / FRED / BLS / ECB / BOJ ／ Tier2: CNBC / Reuters / Bloomberg / Yahoo Finance</span>
+    <span class="footer-text">GLOBAL MACRO DIGEST ● 2026.04.27</span>
+  </div>
+</div></div>
+
+<script>
+window.addEventListener('DOMContentLoaded', function(){
+  var wrappers = document.querySelectorAll('.scale-outer');
+  var resizeTimer = null;
+  function rescale(){
+    var vw = document.documentElement.clientWidth || window.innerWidth;
+    var scale = vw / 1440;
+    wrappers.forEach(function(w){
+      w.style.transform = 'scale(' + scale + ')';
+      w.style.marginBottom = ((900 * scale) - 900 + 32) + 'px';
+      w.style.opacity = '1';
+    });
+  }
+  rescale();
+  window.addEventListener('resize', function(){
+    if (resizeTimer) clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(rescale, 120);
+  });
+});
+</script>
+</body>
+</html>
