@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>グローバルマーケットダイジェスト 2026.07.28 – 08.10</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@700;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg-primary:#FFFFFF;--bg-secondary:#F5F7FA;--bg-tertiary:#EBF0F7;
+  --text-primary:#0A1628;--text-secondary:#1E3A5F;--text-muted:#4A6080;
+  --accent-red:#C0392B;--accent-amber:#D4820A;--accent-green:#1A7A3C;--accent-blue:#1565C0;
+  --header-bg:#0A1628;--header-text:#FFFFFF;--border-light:#D0DCE8;
+  --slide-w:1440px;--slide-h:900px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{overflow-x:hidden;width:100%;}
+body{display:block;overflow-x:hidden;width:100%;background:#111;font-family:'Noto Sans JP',sans-serif;}
+.scale-outer{width:1440px;height:900px;transform-origin:top left;opacity:0;transition:opacity 0.15s ease;will-change:transform;margin:0 auto;}
+.slide{width:1440px;height:900px;background:var(--bg-primary);position:relative;overflow:hidden;flex-shrink:0;display:flex;flex-direction:column;}
+.ticker-bar{background:var(--header-bg);color:#E8EEF5;font-family:'JetBrains Mono',monospace;font-size:12.5px;padding:8px 20px;display:flex;align-items:center;gap:32px;flex-shrink:0;white-space:nowrap;overflow:hidden;letter-spacing:0.02em;}
+.ticker-item{display:flex;align-items:center;gap:6px;}
+.ticker-label{color:#8899AA;font-size:11px;}
+.ticker-sep{color:#3A4A5E;font-size:14px;}
+.tick-up{color:#4CD964;}.tick-down{color:#FF6B6B;}.tick-neutral{color:#FFD060;}
+.slide-header{background:var(--header-bg);padding:14px 48px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;border-bottom:3px solid var(--accent-amber);}
+.slide-number{font-family:'JetBrains Mono',monospace;color:#8899AA;font-size:13px;letter-spacing:0.1em;}
+.slide-title{font-family:'Noto Serif JP',serif;font-weight:900;font-size:30px;color:#FFFFFF;letter-spacing:0.04em;}
+.slide-period{font-family:'JetBrains Mono',monospace;color:#7AAACF;font-size:13px;}
+.slide-body{flex:1;padding:28px 48px 24px;display:flex;flex-direction:column;justify-content:space-between;overflow-y:auto;}
+.slide-footer{background:var(--bg-secondary);border-top:1px solid var(--border-light);padding:7px 48px;display:flex;justify-content:space-between;align-items:center;flex-shrink:0;}
+.footer-text{font-size:12px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;}
+.section-title{font-family:'Noto Serif JP',serif;font-weight:700;font-size:24px;color:var(--text-primary);border-left:4px solid var(--accent-blue);padding-left:12px;margin-bottom:14px;}
+.section-subtitle{font-size:16px;font-weight:600;color:var(--text-secondary);margin-bottom:10px;border-bottom:1px solid var(--border-light);padding-bottom:5px;}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px;flex:1;}
+.card-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;flex:1;}
+.card-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;flex:1;}
+.insight-items{display:flex;flex-direction:column;gap:10px;flex:1;}
+.data-table{width:100%;border-collapse:collapse;font-size:13.5px;}
+.data-table th{background:var(--header-bg);color:#FFFFFF;padding:10px 14px;text-align:left;font-size:13px;font-weight:600;white-space:nowrap;}
+.data-table td{padding:9px 14px;border-bottom:1px solid var(--border-light);vertical-align:top;line-height:1.45;font-size:13.5px;}
+.data-table tr:nth-child(even) td{background:var(--bg-secondary);}
+.data-table tr:hover td{background:var(--bg-tertiary);}
+.data-table td:first-child{font-weight:600;color:var(--text-secondary);}
+.risk-table{width:100%;border-collapse:collapse;font-size:13px;}
+.risk-table th{background:#1A2A40;color:#D0DDE8;padding:9px 12px;text-align:left;font-size:12px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;}
+.risk-table td{padding:10px 12px;border-bottom:1px solid var(--border-light);vertical-align:top;line-height:1.5;}
+.risk-table tr:nth-child(even) td{background:var(--bg-secondary);}
+.card{background:var(--bg-secondary);border-radius:8px;border:1px solid var(--border-light);padding:16px 20px;display:flex;flex-direction:column;gap:8px;}
+.card-title{font-size:14.5px;font-weight:700;color:var(--text-primary);border-bottom:1px solid var(--border-light);padding-bottom:7px;display:flex;align-items:center;gap:6px;}
+.card-body{font-size:13px;color:var(--text-secondary);line-height:1.6;}
+.insight-item{background:var(--bg-secondary);border-radius:6px;border-left:4px solid var(--accent-blue);padding:12px 16px;font-size:13px;line-height:1.6;color:var(--text-secondary);}
+.insight-item strong{color:var(--text-primary);font-weight:700;}
+.cal-item{background:var(--bg-secondary);border-radius:6px;border:1px solid var(--border-light);padding:12px 16px;display:flex;flex-direction:column;gap:4px;}
+.cal-date{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent-blue);font-weight:600;text-transform:uppercase;letter-spacing:0.05em;}
+.cal-event{font-size:14.5px;font-weight:700;color:var(--text-primary);}
+.cal-detail{font-size:12.5px;color:var(--text-muted);line-height:1.5;}
+.cal-reaction{font-size:12px;color:var(--text-secondary);margin-top:4px;border-top:1px dashed var(--border-light);padding-top:4px;line-height:1.4;}
+.tag{display:inline-block;padding:2px 8px;border-radius:3px;font-size:12px;font-weight:600;font-family:'JetBrains Mono',monospace;}
+.tag-red{background:#FDECEA;color:var(--accent-red);border:1px solid #F5C6C2;}
+.tag-amber{background:#FFF3E0;color:var(--accent-amber);border:1px solid #FFCC80;}
+.tag-green{background:#E8F5E9;color:var(--accent-green);border:1px solid #A5D6A7;}
+.tag-blue{background:#E3F2FD;color:var(--accent-blue);border:1px solid #90CAF9;}
+.prob-high{background:#FDECEA;color:var(--accent-red);font-weight:700;font-family:'JetBrains Mono',monospace;text-align:center;border-radius:4px;padding:2px 6px;font-size:12px;display:inline-block;}
+.prob-mid{background:#FFF3E0;color:var(--accent-amber);font-weight:700;font-family:'JetBrains Mono',monospace;text-align:center;border-radius:4px;padding:2px 6px;font-size:12px;display:inline-block;}
+.prob-low{background:#E8F5E9;color:var(--accent-green);font-weight:700;font-family:'JetBrains Mono',monospace;text-align:center;border-radius:4px;padding:2px 6px;font-size:12px;display:inline-block;}
+.mono{font-family:'JetBrains Mono',monospace;font-size:13px;}
+.up{color:var(--accent-green);font-weight:600;}
+.down{color:var(--accent-red);font-weight:600;}
+.neutral{color:var(--accent-amber);font-weight:600;}
+.impact-high{color:var(--accent-red);font-size:14px;}
+.impact-mid{color:var(--accent-amber);font-size:14px;}
+.impact-low{color:var(--accent-green);font-size:14px;}
+.headline-section-label{font-family:'JetBrains Mono',monospace;color:var(--text-muted);font-size:12.5px;letter-spacing:0.12em;text-transform:uppercase;flex-shrink:0;}
+.headline-stack{display:flex;flex-direction:column;gap:14px;flex:1;margin:10px 0 14px;}
+.headline-card{display:flex;gap:20px;align-items:center;background:var(--bg-secondary);border:1px solid var(--border-light);border-left:5px solid var(--accent-blue);border-radius:8px;padding:14px 24px;flex:1;}
+.headline-card.hl-bull{border-left-color:var(--accent-green);}
+.headline-card.hl-bear{border-left-color:var(--accent-red);}
+.headline-card.hl-neutral{border-left-color:var(--accent-amber);}
+.headline-card.hl-info{border-left-color:var(--accent-blue);}
+.hl-index{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:34px;line-height:1;color:var(--accent-blue);min-width:46px;text-align:center;}
+.hl-bull .hl-index{color:var(--accent-green);}
+.hl-bear .hl-index{color:var(--accent-red);}
+.hl-neutral .hl-index{color:var(--accent-amber);}
+.hl-content{display:flex;flex-direction:column;gap:5px;flex:1;}
+.hl-meta{display:flex;align-items:center;gap:10px;}
+.hl-date{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-muted);letter-spacing:0.04em;}
+.hl-headline{font-family:'Noto Serif JP',serif;font-weight:700;font-size:20px;line-height:1.3;color:var(--text-primary);}
+.hl-body{font-family:'Noto Sans JP',sans-serif;font-size:15px;line-height:1.7;color:var(--text-secondary);}
+.hl-reaction{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--text-muted);border-top:1px dashed var(--border-light);padding-top:6px;margin-top:3px;line-height:1.5;}
+.hl-reaction .up{color:var(--accent-green);font-weight:600;}
+.hl-reaction .down{color:var(--accent-red);font-weight:600;}
+.thesis-closer{background:linear-gradient(135deg,#0A1628 0%,#1E3A5F 100%);border-radius:10px;padding:14px 26px;display:flex;flex-direction:column;gap:7px;flex-shrink:0;}
+.thesis-closer .closer-label{font-family:'JetBrains Mono',monospace;color:#7AAACF;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;}
+.thesis-closer .closer-thesis{font-family:'Noto Serif JP',serif;font-weight:700;font-size:19px;line-height:1.4;color:#FFD060;}
+.thesis-closer .closer-question{font-family:'Noto Sans JP',sans-serif;font-size:14.5px;line-height:1.65;color:#CFE0F0;}
+</style>
+</head>
+<body>
+
+<!-- ===================== SLIDE 1: 週間テーゼ ===================== -->
+<div class="scale-outer"><div class="slide" id="slide-1">
+  <div class="ticker-bar">
+    <span class="ticker-item"><span class="ticker-label">S&amp;P500</span><span class="tick-up">7,757.64 ▲4.65%</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">NASDAQ</span><span class="tick-up">26,690.62 ▲7.05%</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">NIKKEI</span><span class="tick-up">66,970.22 ▲3.14%</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">2Y/10Y/30Y</span><span class="tick-neutral">4.19 / 4.65 / 5.19</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">USD/JPY</span><span class="tick-up">158.33</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">WTI</span><span class="tick-up">82.13 ▲5%(8/10)</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">GOLD</span><span class="tick-up">4,378</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">BTC</span><span class="tick-up">65,143</span></span>
+  </div>
+  <div class="slide-header">
+    <span class="slide-number">01 / 09</span>
+    <span class="slide-title">週間テーゼ — 悪い数字が最高値を連れてきた</span>
+    <span class="slide-period">2026.07.28 – 08.10</span>
+  </div>
+  <div class="slide-body">
+
+    <div class="headline-section-label">◆ 今週の3大ヘッドライン ／ TOP 3 STORIES</div>
+
+    <div class="headline-stack">
+      <div class="headline-card hl-bear">
+        <div class="hl-index">01</div>
+        <div class="hl-content">
+          <div class="hl-meta"><span class="tag tag-red">テクノロジー / 中国</span><span class="hl-date">7/28</span></div>
+          <div class="hl-headline">中国製の露光装置が量産に入り、世界の半導体株が崩れた</div>
+          <div class="hl-body">中国が液浸DUV露光装置の量産を始めたと報じられ、装置株から売りが世界に連鎖しました。上海に上場したメモリ大手CXMTは初日に5倍超。日経平均は一時3,000円を超えて下げました。</div>
+          <div class="hl-reaction">市場の反応 ▸ 日経平均 <span class="down">-2,566円（-3.95%）</span> ／ 半導体ETF（SMH）<span class="down">-2%超</span> ／ AMD <span class="down">-5%</span></div>
+        </div>
+      </div>
+      <div class="headline-card hl-info">
+        <div class="hl-index">02</div>
+        <div class="hl-content">
+          <div class="hl-meta"><span class="tag tag-blue">為替 / 政策</span><span class="hl-date">7/31–8/3</span></div>
+          <div class="hl-headline">163円の円安に、日米が28年ぶりの共同介入で応えた</div>
+          <div class="hl-body">日米の財務当局が7月31日、協調して円買い介入を実施し、8月3日に公表しました。1998年以来初の共同介入です。直前のドル円は163円台と、およそ40年ぶりの円安水準でした。</div>
+          <div class="hl-reaction">市場の反応 ▸ USD/JPY 163円台 → <span class="up">156.34円（8/3）</span> ／ その後 <span class="down">158円台へ半値戻し</span></div>
+        </div>
+      </div>
+      <div class="headline-card hl-bull">
+        <div class="hl-index">03</div>
+        <div class="hl-content">
+          <div class="hl-meta"><span class="tag tag-green">経済指標</span><span class="hl-date">8/7</span></div>
+          <div class="hl-headline">雇用が23,000人減り、株式市場は史上最高値で応えた</div>
+          <div class="hl-body">7月の米雇用統計は23,000人の減少と、80,000人増の予想を裏切りました。ところが株は急伸します。利上げの必要が消えたと読まれたためです。S&amp;P500とナスダックは史上最高値を更新しました。</div>
+          <div class="hl-reaction">市場の反応 ▸ S&amp;P500 <span class="up">7,757.64（史上最高値）</span> ／ NASDAQ 週間 <span class="up">+4.86%</span> ／ 金 週間 <span class="up">+7%</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="thesis-closer">
+      <span class="closer-label">◆ 週間テーゼ ／ 世界はどこへ向かうのか</span>
+      <div class="closer-thesis">「利上げの恐怖を消したのは、景気の強さではなく雇用の弱さだった」</div>
+      <div class="closer-question">問い ▸ この2週間で膨らんだあなたの含み益は、企業の稼ぐ力への評価だろうか。それとも「利上げが遠のいた」という安堵だろうか。もし後者なら、8月12日のCPIに原油高が戻ってきた瞬間、同じ理屈が逆向きに働く。安堵で得たものを、安堵が消える前にどう扱うか──数字が出てから考えるのでは、遅いのではないだろうか。</div>
+    </div>
+
+  </div>
+  <div class="slide-footer">
+    <span class="footer-text">Sources: CNBC / Bloomberg / Reuters / BLS / 株探・日経（交差検証済）</span>
+    <span class="footer-text">GLOBAL MACRO DIGEST ● 2026.08.10</span>
+  </div>
+</div></div>
+
+<!-- ===================== SLIDE 2: マクロ・地政学マトリクス ===================== -->
+<div class="scale-outer"><div class="slide" id="slide-2">
+  <div class="ticker-bar">
+    <span class="ticker-item"><span class="ticker-label">FED FUNDS</span><span class="tick-neutral">3.50–3.75%</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">BOJ</span><span class="tick-neutral">1.00%</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">US CPI(6月)</span><span class="tick-down">+3.5% YoY</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">CORE PCE(6月)</span><span class="tick-down">+3.3% YoY</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">NFP(7月)</span><span class="tick-down">-23,000人</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">失業率</span><span class="tick-neutral">4.1%</span></span>
+  </div>
+  <div class="slide-header">
+    <span class="slide-number">02 / 09</span>
+    <span class="slide-title">🌐 マクロ・地政学マトリクス</span>
+    <span class="slide-period">2026.07.28 – 08.10</span>
+  </div>
+  <div class="slide-body">
+    <div style="display:flex;flex-direction:column;flex:1;gap:14px;">
+      <table class="data-table" style="height:100%">
+        <thead><tr><th style="width:15%">項目</th><th style="width:37%">動向</th><th style="width:33%">市場インパクト</th><th style="width:15%">シグナル</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>FRB<br><span class="mono">7/29 FOMC</span></td>
+            <td>政策金利3.50–3.75%を9対3で据え置き（5会合連続）。Hammack・Kashkari・Loganの3名が0.25%の「利上げ」を主張する異例のタカ派反対票。声明は経済活動を「堅調」と評価し、中東発の不確実性に言及。</td>
+            <td><span class="impact-high">🔴 高</span> 反対票3票は1990年代以来の規模。8/7の雇用統計までは9月利上げ観測が燻り続け、長期金利の高止まりを支えた。</td>
+            <td><span class="tag tag-amber">⚖️ 中立</span></td>
+          </tr>
+          <tr>
+            <td>日銀<br><span class="mono">7/30–31 MPM</span></td>
+            <td>政策金利1.00%を8対1で据え置き。高田委員が1.25%への利上げを主張して反対。展望レポートでコアインフレが2026年度下期に「2%を明確に上回る」と明記。賃金転嫁・原油高・円安を要因に挙げた。</td>
+            <td><span class="impact-high">🔴 高</span> 「年内あと1回の利上げ」がコンセンサス化。据え置き自体は日本株の支援材料になった（7/31 日経+2,494円）。</td>
+            <td><span class="tag tag-amber">⚖️ 中立</span></td>
+          </tr>
+          <tr>
+            <td>日米協調介入<br><span class="mono">7/31実施・8/3公表</span></td>
+            <td>財務省と米財務省が1998年以来初の共同円買い介入。ベッセント財務長官・片山財務相が確認し「必要なら再介入」と共同で表明。米側の動機は弱い円による貿易赤字拡大の阻止。</td>
+            <td><span class="impact-high">🔴 高</span> ドル円は163円台→156.34円へ急伸。ただし1週間で介入益のほぼ半分を返上し、8/10は158円台。</td>
+            <td><span class="tag tag-blue">📈 円強気</span></td>
+          </tr>
+          <tr>
+            <td>米雇用統計<br><span class="mono">7月分・8/7発表</span></td>
+            <td>非農業部門雇用者数は-23,000人（予想+80,000人）。政府部門が-53,000人、民間はわずか+30,000人。失業率は4.1%へ低下したが労働参加率の低下が主因。平均時給は前年比+3.2%と2021年5月以来の低い伸び。</td>
+            <td><span class="impact-high">🔴 高</span> 9月利上げ観測がほぼ消滅。株式・債券・金が同時に上昇する「安堵ラリー」の起点になった。</td>
+            <td><span class="tag tag-green">📈 株式強気</span></td>
+          </tr>
+          <tr>
+            <td>米インフレ指標<br><span class="mono">6月PCE・7/30発表</span></td>
+            <td>ヘッドラインPCE 前年比+3.7%（5月+4.1%から低下）、コアPCE +3.3%（同+3.4%）。月次は-0.1%。6月CPI（+3.5%／コア+2.6%）と並び、6月の停戦局面での原油下落が数字を押し下げた。</td>
+            <td><span class="impact-mid">🟡 中</span> 低下はしたが2%目標には遠い。しかもこの改善は封鎖再開前の原油安の産物で、7月分では巻き戻る公算。</td>
+            <td><span class="tag tag-amber">⚖️ 中立</span></td>
+          </tr>
+          <tr>
+            <td>地政学<br><span class="mono">ホルムズ海峡</span></td>
+            <td>8/4にベッセント長官が「今週にも海峡再開合意」と発言し原油急落。しかし8/6にイランが制限的な運用案を提示して急反発。8/10には「米の海上封鎖が続く限り再開の条件はない」と表明し、交渉は振り出しへ。</td>
+            <td><span class="impact-high">🔴 高</span> WTIは75.77ドル（8/4）→82.13ドル（8/10、+5%）。原油市場は「合意」をもう信じていない。</td>
+            <td><span class="tag tag-red">📉 弱気</span></td>
+          </tr>
+          <tr>
+            <td>米ビッグテック決算<br><span class="mono">7/29–30</span></td>
+            <td>Microsoft +8%・Amazon +10%と、AI設備投資を業績で正当化した企業が急伸。一方MetaはEPSが予想を14%下回り-9.6%、Appleも-4%。「同じcapexでも回収の道筋の有無」で明暗が割れた。</td>
+            <td><span class="impact-mid">🟡 中</span> 前号の「増額=売り」から「回収次第」へ市場の物差しが進化。NASDAQ週間+4.86%の主燃料。</td>
+            <td><span class="tag tag-green">📈 強気</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="footer-text">Sources: Federal Reserve / 日銀 / BLS / BEA / CNBC / Bloomberg / Reuters</span>
+    <span class="footer-text">GLOBAL MACRO DIGEST ● 2026.08.10</span>
+  </div>
+</div></div>
+
+<!-- ===================== SLIDE 3: スコアカード① 株式・債券 ===================== -->
+<div class="scale-outer"><div class="slide" id="slide-3">
+  <div class="ticker-bar">
+    <span class="ticker-item"><span class="ticker-label">S&amp;P500</span><span class="tick-up">7,757.64</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">NASDAQ</span><span class="tick-up">26,690.62</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">DOW</span><span class="tick-up">54,036.93</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">NIKKEI</span><span class="tick-up">66,970.22</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">TOPIX</span><span class="tick-up">4,074.93</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">2Y/10Y/30Y</span><span class="tick-neutral">4.19 / 4.65 / 5.19</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">HY OAS</span><span class="tick-neutral">271bp</span></span>
+  </div>
+  <div class="slide-header">
+    <span class="slide-number">03 / 09</span>
+    <span class="slide-title">📊 マーケットスコアカード ① 株式・債券</span>
+    <span class="slide-period">2026.07.28 – 08.10</span>
+  </div>
+  <div class="slide-body">
+    <div class="two-col">
+      <div style="display:flex;flex-direction:column;">
+        <div class="section-subtitle">株式 — 7/27終値 → 期間末終値（米8/7・日8/10）</div>
+        <table class="data-table">
+          <thead><tr><th>指数</th><th>7/27</th><th>期間末</th><th>変動</th></tr></thead>
+          <tbody>
+            <tr><td>S&amp;P 500</td><td class="mono">7,413.18</td><td class="mono">7,757.64 ★最高値</td><td class="mono up">▲ +4.65%</td></tr>
+            <tr><td>NASDAQ総合</td><td class="mono">24,932.08</td><td class="mono">26,690.62 ★最高値</td><td class="mono up">▲ +7.05%</td></tr>
+            <tr><td>NYダウ</td><td class="mono">52,210.08</td><td class="mono">54,036.93</td><td class="mono up">▲ +3.50%（8/3最高値）</td></tr>
+            <tr><td>Russell 2000</td><td class="mono neutral">—</td><td class="mono neutral">週次データ確認中</td><td class="mono up">年初来+20%と23年ぶりの強さ</td></tr>
+            <tr><td>日経平均</td><td class="mono">64,931.19</td><td class="mono">66,970.22</td><td class="mono up">▲ +3.14%（安値62,364.92から+7.4%）</td></tr>
+            <tr><td>TOPIX</td><td class="mono neutral">—</td><td class="mono">4,074.93（8/7）</td><td class="mono up">▲ 4日続伸・バリュー優位</td></tr>
+            <tr><td>グロース250</td><td class="mono neutral">—</td><td class="mono neutral">データ確認中</td><td class="mono up">7/31 大幅続伸</td></tr>
+          </tbody>
+        </table>
+        <div class="section-subtitle" style="margin-top:14px;">債券・金利 — 米国債ほか</div>
+        <table class="data-table">
+          <thead><tr><th>年限</th><th>始点</th><th>8/7</th><th>変動</th></tr></thead>
+          <tbody>
+            <tr><td>2年</td><td class="mono">4.33%（7/24）</td><td class="mono">4.19%</td><td class="mono up">▼ -14bp</td></tr>
+            <tr><td>10年</td><td class="mono">4.75%（7/31）</td><td class="mono">4.65%</td><td class="mono up">▼ -10bp（週間）</td></tr>
+            <tr><td>30年</td><td class="mono">5.16%（7/24）</td><td class="mono">5.19%</td><td class="mono down">▲ +3bp 高止まり</td></tr>
+            <tr><td>2s10s</td><td class="mono">+36bp（7/24）</td><td class="mono">+46bp</td><td class="mono neutral">ブル・スティープ化</td></tr>
+            <tr><td>日本10年</td><td class="mono" colspan="2">2.8%前後（8/4・データ確認中）</td><td class="mono neutral">原油安の日に低下</td></tr>
+            <tr><td>クレジット</td><td class="mono" colspan="2">HY OAS 271bp（8/6）／ IG 81bp前後</td><td class="mono neutral">史上最タイト圏で安定</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="display:flex;flex-direction:column;">
+        <div class="section-subtitle">定性インサイト</div>
+        <div class="insight-items">
+          <div class="insight-item" style="border-left-color:var(--accent-green)"><strong>NASDAQ +7.05%は「決算×雇用」の合わせ技：</strong>Microsoft +8%・Amazon +10%が土台を作り、8/7の雇用統計が上に蓋をしていた利上げ観測を外しました。Nvidiaは最終週だけで+11%。7月に「AIは売り」だった資金が、2週間で全量戻ってきた形です。<span class="tag tag-green">モメンタム</span></div>
+          <div class="insight-item" style="border-left-color:var(--accent-blue)"><strong>買われたのは短期ゾーンだけ：</strong>2年債は-14bp、なのに30年債は+3bpの5.19%。「利上げ消滅」は織り込んでも「長期のインフレと財政」は許していない、という長短の役割分担が鮮明です。株の最高値と30年5%台の同居は2026年の常態になりつつあります。</div>
+          <div class="insight-item" style="border-left-color:var(--accent-red)"><strong>日経平均の往復4,605円：</strong>7/28に中国半導体ショックで62,364円まで急落し、7/31の日銀据え置きで+2,494円、8/10の利上げ観測後退で+1,363円。2週間の行って来いを演出したのは業績ではなく、半導体と金融政策の観測でした。<span class="tag tag-red">高ボラ</span></div>
+          <div class="insight-item" style="border-left-color:var(--accent-green)"><strong>TOPIX 4日続伸と日経の小反落（8/7）：</strong>SBG・レーザーテック・富士フイルムの決算失望で日経が-76円の日も、TOPIXは+0.47%。指数寄与の大きいグロースが売られてもバリューが吸収する構図が続いており、NT倍率は低下方向です。<span class="tag tag-green">バリュー優位</span></div>
+          <div class="insight-item" style="border-left-color:var(--accent-amber)"><strong>Russell 2000は年初来+20%：</strong>AI投資の裾野拡大を口実に、赤字小型株が2025年半ば以降+154%と利益のある小型株（+34%）を圧倒。上げ相場の質としては終盤戦のパターンに近いことは覚えておきたい数字です。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="footer-text">Sources: CNBC / Washington Post(AP) / Yahoo Finance / Forbes / Advisor Perspectives / 株探・財経新聞</span>
+    <span class="footer-text">GLOBAL MACRO DIGEST ● 2026.08.10</span>
+  </div>
+</div></div>
+
+<!-- ===================== SLIDE 4: スコアカード② FX・コモディティ・暗号資産 ===================== -->
+<div class="scale-outer"><div class="slide" id="slide-4">
+  <div class="ticker-bar">
+    <span class="ticker-item"><span class="ticker-label">USD/JPY</span><span class="tick-up">158.33</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">EUR/USD</span><span class="tick-up">1.1547</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">DXY</span><span class="tick-down">99.81</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">WTI</span><span class="tick-up">82.13</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">BRENT</span><span class="tick-up">87.72</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">GOLD</span><span class="tick-up">4,378</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">COPPER</span><span class="tick-up">13,000ドル/t超</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">BTC / ETH</span><span class="tick-up">65,143 / 1,929</span></span>
+  </div>
+  <div class="slide-header">
+    <span class="slide-number">04 / 09</span>
+    <span class="slide-title">📊 マーケットスコアカード ② FX・コモディティ・暗号資産</span>
+    <span class="slide-period">2026.07.28 – 08.10</span>
+  </div>
+  <div class="slide-body">
+    <div class="two-col">
+      <div style="display:flex;flex-direction:column;">
+        <div class="section-subtitle">FX・通貨</div>
+        <table class="data-table">
+          <thead><tr><th>通貨ペア</th><th>始点</th><th>8/10</th><th>特記事項</th></tr></thead>
+          <tbody>
+            <tr><td>USD/JPY</td><td class="mono">163.50台（7/27）</td><td class="mono up">158.33</td><td>介入直後156.34→半値戻し。40年ぶり安値圏から一段戻す</td></tr>
+            <tr><td>EUR/USD</td><td class="mono">1.1367（7/24）</td><td class="mono up">1.1547</td><td>雇用統計後に1.1580と6月中旬以来の高値</td></tr>
+            <tr><td>DXY</td><td class="mono">101.46（7/24）</td><td class="mono down">99.81</td><td>一時99.43と6月中旬以来の安値。7月高値から-2%</td></tr>
+            <tr><td>キャリー</td><td class="mono" colspan="2">日米短期金利差はおよそ2.5パーセントポイントで不変</td><td>介入は金利差を変えない。円キャリーの原資は健在</td></tr>
+          </tbody>
+        </table>
+        <div class="section-subtitle" style="margin-top:14px;">コモディティ</div>
+        <table class="data-table">
+          <thead><tr><th>銘柄</th><th>期間中の節目</th><th>8/10</th><th>変動</th></tr></thead>
+          <tbody>
+            <tr><td>WTI原油</td><td class="mono">75.77ドル（8/4 -5.7%）</td><td class="mono">82.13ドル</td><td class="mono down">▲ +5%（8/10）・安値から+8.4%</td></tr>
+            <tr><td>Brent原油</td><td class="mono">84.09ドル（7/28）</td><td class="mono">87.72ドル</td><td class="mono down">▲ +4.3%（期間）</td></tr>
+            <tr><td>金</td><td class="mono">4,051ドル（8/3）</td><td class="mono">4,378ドル</td><td class="mono up">▲ 週間+7%・6月上旬以来の高値</td></tr>
+            <tr><td>銀</td><td class="mono">59ドル前後（7/27）</td><td class="mono neutral">データ確認中</td><td class="mono neutral">1月高値116ドルの半値圏</td></tr>
+            <tr><td>銅</td><td class="mono">高値13,173.50ドル/t</td><td class="mono">13,000ドル/t超</td><td class="mono up">▲ 史上最高値圏</td></tr>
+          </tbody>
+        </table>
+        <div class="section-subtitle" style="margin-top:14px;">暗号資産</div>
+        <table class="data-table">
+          <thead><tr><th>銘柄</th><th>7/24</th><th>8/7</th><th>特記事項</th></tr></thead>
+          <tbody>
+            <tr><td>BTC</td><td class="mono">64,148ドル</td><td class="mono up">65,143ドル</td><td>ETF週間+8.65億ドルと4月以来最大の流入</td></tr>
+            <tr><td>ETH</td><td class="mono">1,862ドル</td><td class="mono up">1,929ドル</td><td>ETF週間+2.44億ドル。5営業日連続流入</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="display:flex;flex-direction:column;">
+        <div class="section-subtitle">定性インサイト</div>
+        <div class="insight-items">
+          <div class="insight-item" style="border-left-color:var(--accent-amber)"><strong>介入の賞味期限は1週間だった：</strong>163円台→156.34円で得た約7円のうち、半分を5営業日で返上しました。介入が変えられるのは水準ではなく時間です。買った時間で日銀が9月に動けるか──動けなければ、市場は「介入は失敗」と認定しにいきます。<span class="tag tag-amber">要監視</span></div>
+          <div class="insight-item" style="border-left-color:var(--accent-green)"><strong>金+7%の意味——金を動かすのはミサイルではなくFedの手：</strong>前号で「原油100ドルでも金は無反応」と書きました。その金が、雇用統計1本で週間+7%。地政学ヘッジとしては死んでいた金が、「利上げ消滅=実質金利低下」トレードとしては即座に生き返った。金保有の論拠を金利に置くべき局面です。</div>
+          <div class="insight-item" style="border-left-color:var(--accent-red)"><strong>原油市場は「合意」をもう信じていない：</strong>ベッセント発言で-5.7%、イランの運用案で全戻し、8/10に+5%。82ドルのWTIは、封鎖の長期化を静かに織り込み始めた水準です。株式市場との温度差が広がっています。<span class="tag tag-red">高リスク</span></div>
+          <div class="insight-item" style="border-left-color:var(--accent-blue)"><strong>金・銀・銅が同じ年に最高値を更新——1980年以来：</strong>銅は13,000ドル/tを超え史上最高値圏。貴金属と産業金属が揃って走るのは、インフレの主戦場が金融から実物（電力・AIインフラ・供給制約）へ移った証拠です。これは利下げでは解決しない種類のインフレです。</div>
+          <div class="insight-item" style="border-left-color:var(--accent-amber)"><strong>BTC——資金は戻ったが、価格が追いつかない：</strong>ETFへ4月以来最大の週間流入があっても、価格は65,000ドル止まり。ナスダックが+7%の期間に+1.6%です。6月の-45億ドル流出の傷は、フローの反転だけでは癒えていません。買い手の復帰より、売り手の正体（長期保有者の分配）を疑うべきデータです。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="footer-text">Sources: CNBC / Bloomberg / Fortune / TradingEconomics / みんかぶ・中日新聞 / Farside(ETFフロー)</span>
+    <span class="footer-text">GLOBAL MACRO DIGEST ● 2026.08.10</span>
+  </div>
+</div></div>
+
+<!-- ===================== SLIDE 5: クロスアセット・インサイト ===================== -->
+<div class="scale-outer"><div class="slide" id="slide-5">
+  <div class="ticker-bar">
+    <span class="ticker-item"><span class="ticker-label">CROSS-ASSET</span><span class="tick-neutral">「安堵」が全資産を持ち上げた2週間</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">2s10s</span><span class="tick-neutral">+46bp</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">HY OAS</span><span class="tick-neutral">271bp（最タイト圏）</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">GOLD週間</span><span class="tick-up">+7%</span></span>
+  </div>
+  <div class="slide-header">
+    <span class="slide-number">05 / 09</span>
+    <span class="slide-title">🔬 クロスアセット・インサイト</span>
+    <span class="slide-period">2026.07.28 – 08.10</span>
+  </div>
+  <div class="slide-body">
+    <div class="insight-items" style="justify-content:space-between;gap:14px;">
+      <div class="insight-item" style="border-left-color:var(--accent-amber)"><strong>① 「Bad news is good news」の復活——ただし2021年とは似て非なるもの。</strong>雇用が23,000人減って株が史上最高値。この反応関数は緩和期のそれに見えますが、中身は違います。当時は「悪い数字→利下げ期待」、今回は「悪い数字→利上げ消滅への安堵」。安堵は期待より剥がれやすい。次の雇用統計かCPIが強ければ、同じ感応度で逆回転します。上昇の速さ（S&amp;P500が2週間で+4.65%）自体が、この相場の脆さの裏返しです。<span class="tag tag-amber">相関変化</span></div>
+      <div class="insight-item" style="border-left-color:var(--accent-blue)"><strong>② ブル・スティープ化が語る「動けないFed、終わらないインフレ」。</strong>利上げ観測の消滅で2年債は-14bpと素直に低下。しかし30年債は+3bpの5.19%と逆に上がりました。2s10sは+36bp→+46bpへ拡大。カーブ全体を読むと「Fedは目先動けない。だがインフレと財政の長期リスクは何も解決していない」。長期債は、株式の祝賀ムードに参加することを明確に拒否しています。デュレーションの対価は下がっていません。<span class="tag tag-blue">金利</span></div>
+      <div class="insight-item" style="border-left-color:var(--accent-red)"><strong>③ 介入・日銀・円安の自己矛盾ループ。</strong>介入で円高→輸入物価が一息→日銀の利上げ切迫感が後退→金利差2.5パーセントポイントが温存→円が再び売られる。7円の介入益を1週間で半分返した力学がこれです。介入は円安の「結果」を叩けても「原因」（金利差）に触れられない。原因に触れられるのは9月のMPMだけ。それまでに160円台へ戻れば、第2弾介入と利上げ前倒し観測が同時に走ります。<span class="tag tag-red">高リスク</span></div>
+      <div class="insight-item" style="border-left-color:var(--accent-amber)"><strong>④ 株式と原油、2つの市場が別々の世界を織り込んでいる。</strong>S&amp;P500は最高値、その同じ日にホルムズ海峡は閉じたまま、WTIは+5%。株はAIと流動性の世界を、原油は戦争の世界を生きています。この断絶を強制的に接続するのが8/12のCPIです。6月の物価鈍化は停戦時の原油安の産物でした。7月分には封鎖後の原油高が初めて入ります。エネルギーのベース効果が逆転する最初の月次データです。<span class="tag tag-amber">結節点</span></div>
+      <div class="insight-item" style="border-left-color:var(--accent-green)"><strong>⑤ HY OAS 271bp——「全員が同じ船縁に立つ」静かなサイン。</strong>ハイイールドは史上最タイト10分位、IGは81bpと1998年以来の水準。株最高値・スプレッド最タイト・金最高値圏が同時に成立するのは、流動性が全資産を等しく持ち上げているからです。逆張りの号砲ではありません。ただ、プロテクションがこれほど安い局面も稀です。ヘッジは保険料が安いときに買うもの——8/12の前に、です。<span class="tag tag-green">逆張り視点</span></div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="footer-text">Sources: FRED / CNBC / Bloomberg / ETF Trends / Advisor Perspectives</span>
+    <span class="footer-text">GLOBAL MACRO DIGEST ● 2026.08.10</span>
+  </div>
+</div></div>
+
+<!-- ===================== SLIDE 6: セクター・テーマ熱量 ===================== -->
+<div class="scale-outer"><div class="slide" id="slide-6">
+  <div class="ticker-bar">
+    <span class="ticker-item"><span class="ticker-label">HOT</span><span class="tick-up">メガキャップAI / 金・銅 / エネルギー</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">COLD</span><span class="tick-down">半導体製造装置 / Meta / SBG・AI持株</span></span>
+  </div>
+  <div class="slide-header">
+    <span class="slide-number">06 / 09</span>
+    <span class="slide-title">🔥 セクター・テーマ熱量</span>
+    <span class="slide-period">2026.07.28 – 08.10</span>
+  </div>
+  <div class="slide-body">
+    <div style="display:flex;flex-direction:column;flex:1;gap:14px;">
+      <div style="display:flex;flex-direction:column;flex:1;">
+        <div class="section-subtitle">🔥 HOT TOP 3</div>
+        <div class="card-grid-3">
+          <div class="card">
+            <div class="card-title">① メガキャップAI <span class="tag tag-green">🔥継続</span></div>
+            <div class="card-body"><strong>動いた理由：</strong>Microsoft +8%・Amazon +10%が「capexは回収できる」と証明し、Nvidiaが最終週+11%。<br><strong>持続性：</strong>雇用統計が利上げの蓋を外し、資金回帰が加速。<br><strong>裏のリスク：</strong>審判の最終ラウンドは8/26のNvidia決算。期待のハードルは2週間で大きく上がった。</div>
+          </div>
+          <div class="card">
+            <div class="card-title">② 金・銅（実物資産） <span class="tag tag-green">🔥継続</span></div>
+            <div class="card-body"><strong>動いた理由：</strong>金は週間+7%で4,378ドル、銅は13,000ドル/t超の史上最高値圏。<br><strong>持続性：</strong>実質金利低下期待と実物需要（電力・AIインフラ）の二本柱。<br><strong>裏のリスク：</strong>8/12のCPIが上振れれば実質金利が反騰し、金の柱が1本折れる。</div>
+          </div>
+          <div class="card">
+            <div class="card-title">③ エネルギー <span class="tag tag-amber">⚡一時的</span></div>
+            <div class="card-body"><strong>動いた理由：</strong>8/10にWTI +5%。ホルムズ交渉の暗転で供給プレミアムが復活。<br><strong>持続性：</strong>合意成立の一報で瞬時に剥落する種類の上昇。<br><strong>裏のリスク：</strong>方向性の賭けではなく、株式ロングの保険として持つのが正しい使い方。</div>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;flex:1;">
+        <div class="section-subtitle">🧊 COLD WORST 3</div>
+        <div class="card-grid-3">
+          <div class="card">
+            <div class="card-title">① 半導体製造装置・メモリ <span class="tag tag-red">構造的</span></div>
+            <div class="card-body">中国の液浸DUV量産報道（7/28）でASML・装置株が急落、AMD -5%・Micron -2%。CXMTは上場初日+466%。<strong>「中国が作れないから買う」という装置株の前提が侵食され始めた。</strong>多年単位のテーマであり、リバウンドしても論拠は戻らない。</div>
+          </div>
+          <div class="card">
+            <div class="card-title">② Meta <span class="tag tag-amber">一時的か構造的か</span></div>
+            <div class="card-body">売上高608億ドル（+27%）と絶好調でも、EPS 6.18ドルが予想を14%下回り<strong>-9.6%</strong>。同じ週にMicrosoftとAmazonが上がった事実が重要で、市場は「capexの額」ではなく「回収の道筋」で個社を選別し始めた。物差しの進化に置いていかれた形。</div>
+          </div>
+          <div class="card">
+            <div class="card-title">③ ソフトバンクG・AI投資持株 <span class="tag tag-amber">一時的</span></div>
+            <div class="card-body">Q1純利益3,473億円（-18%）、SVFの投資利益がほぼ消失（前年4,514億円→54億円）。8/7の日経下押しの主因に。<strong>AIへの「間接投資」の器は、直接投資（半導体・クラウド）より景気とバリュエーションに脆い</strong>ことを再確認させた決算。</div>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;flex:1;">
+        <div class="section-subtitle">📌 注目決算・企業イベント</div>
+        <div class="card-grid-3">
+          <div class="card">
+            <div class="card-title">🇯🇵 トヨタ（8/4発表）</div>
+            <div class="card-body">営業利益は関税・原価高で-8.8%の1兆634億円ながら、最終利益は+75.6%の1兆4,770億円。通期最終を8%上方修正。<strong>円安の追い風を数字で示した</strong>——介入で円高に振れれば、この上方修正ロジックが逆回転する点に注意。</div>
+          </div>
+          <div class="card">
+            <div class="card-title">🇺🇸 Microsoft / Amazon（7/29–30発表）</div>
+            <div class="card-body">Azureのcapex 410億ドルを「供給制約の解消」として市場が容認。<strong>「増額=売り」だった前号から物差しが変わった</strong>転換点。ただしこの容認はAI需要の実在が前提で、その検証は8/26のNvidiaに委ねられた。</div>
+          </div>
+          <div class="card">
+            <div class="card-title">🇺🇸 NVIDIA（8/26予定）</div>
+            <div class="card-body">Q2 FY27決算。最終週だけで+11%上昇した後の決算であり、<strong>ビートしても「織り込み済み」で売られる余地</strong>がある。データセンター売上のガイダンスと中国向け出荷の扱いが焦点。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="footer-text">Sources: Yahoo Finance / TradingKey / CNBC / Bloomberg Japan / 株探・Response</span>
+    <span class="footer-text">GLOBAL MACRO DIGEST ● 2026.08.10</span>
+  </div>
+</div></div>
+
+<!-- ===================== SLIDE 7: リスクレーダー ===================== -->
+<div class="scale-outer"><div class="slide" id="slide-7">
+  <div class="ticker-bar">
+    <span class="ticker-item"><span class="ticker-label">RISK RADAR</span><span class="tick-down">テールリスク5件を監視</span></span>
+    <span class="ticker-sep">|</span>
+    <span class="ticker-item"><span class="ticker-label">最大の火種</span><span class="tick-down">8/12 CPIによる「安堵」の剥落</span></span>
+  </div>
+  <div class="slide-header">
+    <span class="slide-number">07 / 09</span>
+    <span class="slide-title">⚠️ リスクレーダー</span>
+    <span class="slide-period">2026.07.28 – 08.10</span>
+  </div>
+  <div class="slide-body">
+    <div style="display:flex;flex-direction:column;flex:1;">
+      <table class="risk-table" style="height:100%">
+        <thead><tr><th style="width:20%">リスク</th><th style="width:9%">発生確率</th><th style="width:9%">影響度</th><th style="width:11%">時間軸</th><th style="width:51%">対処の視点</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>7月CPIの上振れ<br><span class="mono">8/12発表</span></td>
+            <td><span class="prob-mid">中〜高</span></td>
+            <td><span class="impact-high">🔴 極大</span></td>
+            <td>今週</td>
+            <td>6月の物価鈍化（CPI 3.5%・PCE 3.7%）は停戦時の原油安の産物。7月分には封鎖後の原油高が初めて入る。上振れれば9月利上げ観測が一夜で復活し、2週間の安堵ラリーの前提が消える。雇用減速と同時なら「スタグフレーション」の語が主役に戻る。イベント前に、安いVIXでのヘッジかグロスの圧縮かを決めておく。</td>
+          </tr>
+          <tr>
+            <td>ホルムズ交渉決裂・原油再急騰<br><span class="mono">地政学</span></td>
+            <td><span class="prob-mid">中</span></td>
+            <td><span class="impact-high">🔴 極大</span></td>
+            <td>随時</td>
+            <td>イランは8/10「米の海上封鎖が続く限り再開の条件はない」と表明。交渉は振り出しで、在庫の薄い市場に100ドル再トライの燃料は揃っている。エネルギーのロングは見通しではなく保険。株式ポートフォリオの逆相関資産として、サイズを決めて持つ。</td>
+          </tr>
+          <tr>
+            <td>円の介入前水準への回帰<br><span class="mono">為替・日銀</span></td>
+            <td><span class="prob-mid">中〜高</span></td>
+            <td><span class="impact-high">🔴 高</span></td>
+            <td>〜9月MPM</td>
+            <td>介入益7円の半分をすでに返上。金利差2.5パーセントポイントが残る限り、円売りの原資は尽きない。160円台定着なら第2弾介入と日銀利上げ前倒し観測が同時に走り、日本株は「円高×金利上昇」の二重苦になる。ドル建て資産のヘッジ比率は「介入が効いているうち」に見直す。</td>
+          </tr>
+          <tr>
+            <td>米雇用減速の本格化<br><span class="mono">実体経済</span></td>
+            <td><span class="prob-mid">中</span></td>
+            <td><span class="impact-high">🔴 高</span></td>
+            <td>1〜3か月</td>
+            <td>-23,000人のうち-53,000人は政府部門の季節要因で修正の可能性がある。だが民間+30,000人・時給+3.2%は装飾なしに弱い。失業率4.1%への「低下」も参加率低下の産物。次回9/4の雇用統計で2か月連続マイナスなら、市場の解釈は「利上げ消滅」から「景気後退」へ切り替わる。安堵と不況の境界線は1本のデータしかない。</td>
+          </tr>
+          <tr>
+            <td>クレジットの自己満足の巻き戻し<br><span class="mono">クレジット</span></td>
+            <td><span class="prob-low">低〜中</span></td>
+            <td><span class="impact-mid">🟡 中〜高</span></td>
+            <td>3〜6か月</td>
+            <td>HY OAS 271bp・IG 81bpは過去25年で最タイト5%圏。ここからの改善余地は数十bp、悪化余地は数百bp——非対称性が極端。スプレッド商品の新規買いは期待値が薄い。むしろ株式下落時のヘッジとしてCDXなどプロテクションの安さを利用する側に回る。</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="footer-text">Sources: FRED / BLS / CNBC / Bloomberg / Reuters</span>
+    <span class="footer-text">GLOBAL MACRO DIGEST ● 2026.08.10</span>
+  </div>
+</div></div>
+
+<!-- ===================== SLIDE 8: フォワードカレンダー ===================== -->
+<div class="scale-outer"><div class="slide" id="slide-8">
+  <div class="ticker-bar">
+    <span class="ticker-item"><span class="ticker-label">今後2週間</span><span class="tick-neutral">CPI・小売・日本GDP・Nvidia決算・ジャクソンホールへ</span></span>
+  </div>
+  <div class="slide-header">
+    <span class="slide-number">08 / 09</span>
+    <span class="slide-title">📅 フォワードカレンダー（今後2週間）</span>
+    <span class="slide-period">2026.08.11 – 08.29</span>
+  </div>
+  <div class="slide-body">
+    <div class="card-grid-3">
+      <div class="cal-item">
+        <div class="cal-date">8/12 (水) 8:30 EDT</div>
+        <div class="cal-event">★米7月CPI</div>
+        <div class="cal-detail">前回（6月）はヘッドライン+3.5%・コア+2.6%と予想比下振れ。ただしそれは停戦時の原油安によるもので、7月分は封鎖後の原油高が入る最初の月。</div>
+        <div class="cal-reaction">上振れ → 9月利上げ観測が復活し、安堵ラリーの逆回転。グロース・金・長期債が同時に打たれる。下振れ → 最高値更新の継続、ドル安加速。</div>
+      </div>
+      <div class="cal-item">
+        <div class="cal-date">8/13 (木) 8:30 EDT</div>
+        <div class="cal-event">米7月PPI</div>
+        <div class="cal-detail">企業段階のパイプライン圧力。エネルギー投入コストの転嫁がどの段階まで進んでいるかを確認する。</div>
+        <div class="cal-reaction">CPIと同方向に上振れなら、インフレ再加速の裏付けとして債券市場が先に反応する。</div>
+      </div>
+      <div class="cal-item">
+        <div class="cal-date">8/14 (金)</div>
+        <div class="cal-event">米7月小売売上高・ミシガン大速報</div>
+        <div class="cal-detail">雇用減が消費に波及しているかのクロスチェック。ガソリン高による名目かさ上げに注意（実質で読む）。</div>
+        <div class="cal-reaction">弱ければ「利上げ消滅」の追認か「景気後退」の始まりかの解釈争いに。株の反応が上下どちらに出るかで、市場の本音が分かる。</div>
+      </div>
+      <div class="cal-item">
+        <div class="cal-date">8/17 (月) 8:50 JST</div>
+        <div class="cal-event">日本 4–6月期GDP速報</div>
+        <div class="cal-detail">内需・設備投資の強さが焦点。日銀の「年内あと1回」の利上げ判断を裏付けるかどうか。</div>
+        <div class="cal-reaction">強ければ9月利上げ観測が前倒しされ円高・金融株高。弱ければ「利上げしたくてもできない日銀」の再認定で円安再燃。</div>
+      </div>
+      <div class="cal-item">
+        <div class="cal-date">8/19 (水) 14:00 EDT</div>
+        <div class="cal-event">FOMC議事要旨（7月会合分）</div>
+        <div class="cal-detail">3名の利上げ主張の論拠が判明する。反対票の根拠が「原油の二次波及」なら、CPI次第でタカ派が多数派化する道筋が見える。</div>
+        <div class="cal-reaction">タカ派の論理が具体的なら、雇用統計後に消えた利上げ織り込みが部分的に復元される。</div>
+      </div>
+      <div class="cal-item">
+        <div class="cal-date">8/21 (金) 8:30 JST</div>
+        <div class="cal-event">日本7月全国CPI</div>
+        <div class="cal-detail">展望レポートの「2026年度下期に2%を明確に上回る」の検証第1回。エネルギーと食品の転嫁ペースが焦点。</div>
+        <div class="cal-reaction">コアが上振れれば9月利上げがライブ会合化し、円・金融株・JGBが同時に動く。</div>
+      </div>
+      <div class="cal-item">
+        <div class="cal-date">8/26 (水) 引け後</div>
+        <div class="cal-event">★NVIDIA 決算（Q2 FY27）</div>
+        <div class="cal-detail">Microsoft・Amazonが容認させたAI capexの「回収の証明」を一手に引き受ける決算。直前2週間で+11%上昇済み。</div>
+        <div class="cal-reaction">ガイダンス上振れでも「織り込み済み」の反落があり得る。ミスならAI複合体全体の物差しが再びcapex懐疑へ戻る。</div>
+      </div>
+      <div class="cal-item">
+        <div class="cal-date">8/27–29 (木–土)</div>
+        <div class="cal-event">★ジャクソンホール会合</div>
+        <div class="cal-detail">テーマは「金融イノベーション：決済と政策への含意」。Warsh議長の講演が事実上の9月FOMC予告になる。8/12のCPIが講演内容の前提を決める。</div>
+        <div class="cal-reaction">「物価は高すぎる」の再強調なら市場の楽観と正面衝突。雇用重視への転換を示唆すれば据え置き長期化の追認。</div>
+      </div>
+      <div class="cal-item">
+        <div class="cal-date">随時</div>
+        <div class="cal-event">米・イラン ホルムズ交渉</div>
+        <div class="cal-detail">イランは米の海上封鎖解除を先行条件として要求。合意・決裂のどちらも一報で原油が5%動く状態が続く。</div>
+        <div class="cal-reaction">合意 → 原油急落・リスクオン・CPI懸念の後退。決裂の明確化 → 100ドル再トライ、スタグフレーション織り込みの再開。</div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="footer-text">Sources: BLS / 内閣府 / Federal Reserve / Kansas City Fed / CNBC ※日付は現地時間</span>
+    <span class="footer-text">GLOBAL MACRO DIGEST ● 2026.08.10</span>
+  </div>
+</div></div>
+
+<!-- ===================== SLIDE 9: 上級投資家への示唆 ===================== -->
+<div class="scale-outer"><div class="slide" id="slide-9">
+  <div class="ticker-bar">
+    <span class="ticker-item"><span class="ticker-label">IMPLICATIONS</span><span class="tick-neutral">ポジショニング ／ リスク管理 ／ 6〜12か月の視点</span></span>
+  </div>
+  <div class="slide-header">
+    <span class="slide-number">09 / 09</span>
+    <span class="slide-title">💎 上級投資家への示唆</span>
+    <span class="slide-period">2026.07.28 – 08.10</span>
+  </div>
+  <div class="slide-body">
+    <div style="display:flex;flex-direction:column;flex:1;gap:16px;">
+      <div class="card-grid-3">
+        <div class="card">
+          <div class="card-title">① ポジショニング</div>
+          <div class="card-body">
+            <strong>上昇の中身を2つに仕分けする。</strong>この2週間の+4.65%には「業績が証明された上昇」（Microsoft・Amazon・トヨタ）と「安堵による上昇」（指数全体・金・小型株）が混在しています。前者は8/12のCPIが荒れても残り、後者は残りません。保有銘柄がどちらの籠に入っているかを、CPIの前に分類しておくことが、この局面で最も価値のある作業です。<br><br>
+            <strong>日本株はTOPIXバリュー優位の継続を本線に。</strong>グロースの決算失望をバリューが吸収する構図が4日続きました。ただし「介入の円高」と「利上げ観測後退」という2つの追い風は、どちらも政策由来で剥がれやすい点は割り引いて。
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">② リスク管理</div>
+          <div class="card-body">
+            <strong>ヘッジは8/12の前に。</strong>株最高値・スプレッド最タイト・ボラ低位の三点セットは、プロテクションが最も安く買える状態を意味します。CPI上振れは確率としては五分でも、その場合の損失の非対称性は五分ではありません。保険料が安いうちに買うのが保険です。<br><br>
+            <strong>為替ヘッジ比率は「介入が効いているうち」に。</strong>158円は163円より3%有利なヘッジ実行水準です。介入の残り火があるうちに動くか、9月MPMの利上げに賭けて待つか——「待つ」を選ぶなら、それが円安リスクの追加保有だと自覚した上で。
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">③ 中長期（6〜12か月）</div>
+          <div class="card-body">
+            <strong>金・銀・銅の同年最高値は1980年以来——実物インフレの時代認定。</strong>電力・AIインフラ・供給制約が主導するインフレは、利上げでも利下げでも解決しません。実物資産の構造的な組み入れ比率を、戦術ではなく戦略として再設定する時期です。<br><br>
+            <strong>「弱い雇用×高いインフレ×動けない中銀」の三角形が視界に入った。</strong>雇用減とCPI再加速が同時に確認されれば、それはスタグフレーションの初期条件です。株式の景気感応部分と長期債の両方が打たれる組み合わせに対し、機能する資産は実物と短期金利商品に限られます。配分の重心を、まだ市場が楽観的なうちに。
+          </div>
+        </div>
+      </div>
+      <div class="insight-item" style="border-left-color:var(--accent-amber);font-size:13.5px;">
+        <strong>📌 免責：</strong>本資料は情報提供のみを目的として作成されたものであり、特定の金融商品の売買を推奨するものではありません。記載の数値は公開情報にもとづく執筆時点（2026年8月11日・日本時間）のものです。「データ確認中」と付記した数値は単一ソースのため参考値です。投資判断はご自身の責任においてお願いいたします。
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span class="footer-text">Sources: 全スライドの出典を参照 ／ Tier1・Tier2ソースで交差検証</span>
+    <span class="footer-text">GLOBAL MACRO DIGEST ● 2026.08.10</span>
+  </div>
+</div></div>
+
+<script>
+window.addEventListener('DOMContentLoaded', function() {
+  var wrappers = document.querySelectorAll('.scale-outer');
+  var resizeTimer = null;
+  function rescale() {
+    var vw = document.documentElement.clientWidth || window.innerWidth;
+    var scale = vw / 1440;
+    wrappers.forEach(function(w) {
+      w.style.transform = 'scale(' + scale + ')';
+      w.style.transformOrigin = 'top left';
+      w.style.marginBottom = ((900 * scale) - 900 + 32) + 'px';
+      w.style.opacity = '1';
+    });
+  }
+  rescale();
+  window.addEventListener('resize', function() {
+    if (resizeTimer) clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(rescale, 120);
+  });
+});
+</script>
+</body>
+</html>
