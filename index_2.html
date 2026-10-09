@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<!-- NEXT_DIGEST_START: 2026-10-09 （次回の窓の起点。前回digestの終了日 2026-10-08 の翌日。ここより前を起点にすると窓が重複する） -->
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Global Macro Digest — Library</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700;900&family=Noto+Sans+JP:wght@300;400;500&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0A1628;
+    --navy-soft: #1A2740;
+    --gold: #D4820A;
+    --gold-soft: #E8A845;
+    --bg: #FFFFFF;
+    --bg-alt: #F5F7FA;
+    --bg-hover: #EBF0F7;
+    --text: #0A1628;
+    --text-muted: #5A6978;
+    --border: #E1E6EE;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100%; overflow-x: hidden; }
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .header {
+    background: var(--navy);
+    color: #FFF;
+    padding: 36px 24px 32px;
+    border-bottom: 4px solid var(--gold);
+  }
+  .header-inner {
+    max-width: 980px;
+    margin: 0 auto;
+  }
+  .brand-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    color: var(--gold-soft);
+    margin-bottom: 8px;
+  }
+  .brand-title {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 900;
+    font-size: 28px;
+    letter-spacing: 0.02em;
+    margin-bottom: 6px;
+  }
+  .brand-sub {
+    font-size: 14px;
+    color: #B5BFC9;
+    font-weight: 300;
+  }
+  .stats-bar {
+    background: var(--navy-soft);
+    color: #B5BFC9;
+    padding: 10px 24px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+  }
+  .stats-inner {
+    max-width: 980px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+  .stats-inner span strong { color: var(--gold-soft); font-weight: 700; }
+  .container {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 32px 24px 64px;
+  }
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--text-muted);
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-bottom: 32px;
+  }
+  @media (min-width: 720px) {
+    .grid { grid-template-columns: 1fr 1fr; }
+  }
+  .card {
+    display: block;
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--gold);
+    border-radius: 8px;
+    padding: 18px 22px;
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.15s ease, transform 0.15s ease, border-left-color 0.15s ease;
+  }
+  .card:hover {
+    background: var(--bg-hover);
+    border-left-color: var(--navy);
+    transform: translateY(-1px);
+  }
+  .card-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+  }
+  .card-period {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--navy);
+    letter-spacing: 0.02em;
+  }
+  .card-ym {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
+  }
+  .badge {
+    background: var(--gold);
+    color: #FFF;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 3px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .card-title {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 700;
+    font-size: 15.5px;
+    line-height: 1.55;
+    color: var(--text);
+  }
+  .footer {
+    background: var(--navy);
+    color: #B5BFC9;
+    text-align: center;
+    padding: 20px 24px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+  }
+  .footer strong { color: var(--gold-soft); font-weight: 700; }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="brand-label">◆ AKAMI-S ／ INVESTMENT EDUCATION</div>
+    <div class="brand-title">Global Macro Digest — Library</div>
+    <div class="brand-sub">週次の世界マクロ／市場ダイジェスト・アーカイブ</div>
+  </div>
+</header>
+
+<div class="stats-bar">
+  <div class="stats-inner">
+    <span>掲載数: <strong>38</strong></span>
+    <span>最終更新: <strong>2026.10.09</strong></span>
+    <span>SOURCE: <strong>akami-s/akami-report</strong></span>
+  </div>
+</div>
+
+<main class="container">
+  <div class="section-label">◆ レポート一覧（新しい順）</div>
+  <div class="grid">
+        <a href="digest_2026-09-29_10-08.html" class="card">
+          <div class="card-meta">
+            <span class="card-period">2026.09.29 – 10.08</span>
+            <span class="card-ym">2026年10月</span>
+            
+          </div>
+          <div class="card-title">2年債は下がり、30年債は下がらなかった</div>
+        </a>
+
+        <a href="digest_2026-09-24_09-28.html" class="card">
+          <div class="card-meta">
+            <span class="card-period">2026.09.24 – 09.28</span>
+            <span class="card-ym">2026年09月</span>
+            
+          </div>
+          <div class="card-title">黙っていたクレジットが、ついに口を開いた</div>
+        </a>
+
+        <a href="digest_2026-09-08_09-23.html" class="card">
+          <div class="card-meta">
+            <span class="card-period">2026.09.08 – 09.23</span>
+            <span class="card-ym">2026年09月</span>
+            
+          </div>
+          <div class="card-title">金利が2007年に戻り、ナスダックだけが最高値を更新した</div>
+        </a>
+
+        <a href="digest_2026-08-27_09-07.html" class="card">
+          <div class="card-meta">
+            <span class="card-period">2026.08.27 – 09.07</span>
+            <span class="card-ym">2026年09月</span>
+            
+          </div>
+          <div class="card-title">金利も原油も上を向き、指数だけが平然と上がった</div>
+        </a>
+
+        <a href="digest_2026-08-25_08-26.html" class="card">
+          <div class="card-meta">
+            <span class="card-period">2026.08.25 – 08.26</span>
+            <span class="card-ym">2026年08月</span>
+            
+          </div>
+          <div class="card-title">消費が止まった国で、AIだけが倍速で回っている</div>
+        </a>
+
+        <a href="digest_2026-08-10_08-24.html" class="card">
+          <div class="card-meta">
+            <span class="card-period">2026.08.10 – 08.24</span>
+            <span class="card-ym">2026年08月</span>
+            
+          </div>
+          <div class="card-title">戦争の値札は、長期金利に貼り替えられた</div>
+        </a>
+
+        <a href="digest_2026-08-04_08-18.html" class="card">
+          <div class="card-meta">
+            <span class="card-period">2026.08.04 – 08.18</span>
+            <span class="card-ym">2026年08月</span>
+            
+          </div>
+          <div class="card-title">中央銀行が動かない世界で、勝手に上がる金利</div>
+        </a>
+
+        <a href="digest_2026-07-28_08-10.html" class="card">
+          <div class="card-meta">
+            <span class="card-period">2026.07.28 – 08.10</span>
+            <span class="card-ym">2026年08月</span>
+            
+          </div>
+          <div class="card-title">悪い数字が最高値を連れてきた</div>
+        </a>
+
+        <a href="digest_2026-07-23_07-27.html" class="card">
+          <div class="card-meta">
+            <span class="card-period">2026.07.23 – 07.27</span>
+            <span class="card-ym">2026年07月</span>
+            
+          </div>
+          <div class="card-title">相場を動かしたのはタンカーだった</div>
+        </a>
+
+        <a href="digest_2026-07-09_07-22.html" class="card">
+          <div class="card-meta">
+            <span class="card-period">2026.07.09 – 07.22</span>
+            <span class="card-ym">2026年07月</span>
+            
+          </div>
+          <div class="card-title">冷えた物価と燃える原油、数字はすべて過去形</div>
+        </a>
+
+        <a href="digest_2026-06-23_07-14.html" class="card">
+          <div class="card-meta">
+            <span class="card-period">2026.06.23 – 07.14</span>
+            <span class="card-ym">2026年07月</span>
+            
+          </div>
+          <div class="card-title">慢心の相場に、戦争と物価が同じ日に届く</div>
+        </a>
+
+        <a href="digest_2026-07-08_07-10.html" class="card">
+          <div class="card-meta">
+            <span class="card-period">2026.07.08 – 07.10</span>
+            <span class="card-ym">2026年07月</span>
+            
+          </div>
+          <div class="card-title">利下げなき株高、試される持続力</div>
+        </a>
+
+        <a href="digest_2026-06-27_07-07.html" class="card">
+          <div class="card-meta">
+            <span class="card-period">2026.06.27 – 07.07</span>
+            <span class="card-ym">2026年07月</span>
+            
+          </div>
+          <div class="card-title">雇用は失速、それでも金利を下げさせない二つの力</div>
+        </a>
+
+        <a href="digest_2026-06-17_07-02.html" class="card">
+          <div class="card-meta">
+            <span class="card-period">2026.06.17 – 07.02</span>
+            <span class="card-ym">2026年07月</span>
+            
+          </div>
+          <div class="card-title">戦争プレミアムが剥がれた後の素顔</div>
+        </a>
+
+        <a href="digest_2026-06-11_06-24.html" class="card">
+          <div class="card-meta">
+            <span class="card-period">2026.06.11 – 06.24</span>
+            <span class="card-ym">2026年06月</span>
+            
+          </div>
+          <div class="card-title">暴落を、過去最高の決算が押し返した4日間</div>
+        </a>
+
+        <a href="digest_2026-06-10_06-23.html" class="card">
+          <div class="card-meta">
+            <span class="card-period">2026.06.10 – 06.23</span>
+            <span class="card-ym">2026年06月</span>
+            
+          </div>
+          <div class="card-title">史上最高値の翌日に来た半導体ショック</div>
+        </a>
+
+        <a href="digest_2026-06-09_06-22.html" class="card">
+          <div class="card-meta">
+            <span class="card-period">2026.06.09 – 06.22</span>
+            <span class="card-ym">2026年06月</span>
+            
+          </div>
+          <div class="card-title">停戦ユーフォリアと利上げへの静かな反転</div>
+        </a>
+
+        <a href="digest_2026-05-28_06-11.html" class="card">
+          <div class="card-meta">
+            <span class="card-period">2026.05.28 – 06.11</span>
+            <span class="card-ym">2026年06月</span>
+            
+          </div>
+          <div class="card-title">最高値の宴から、戦時インフレへ</div>
+        </a>
+
+        <a href="digest_2026-05-26_06-07.html" class="card">
+          <div class="card-meta">
+            <span class="card-period">2026.05.26 – 06.07</span>
+            <span class="card-ym">2026年06月</span>
+            
+          </div>
+          <div class="card-title">利下げを諦め、利上げを織り込んだ週</div>
+        </a>
+
+        <a href="digest_2026-05-20_06-02.html" class="card">
+          <div class="card-meta">
+            <span class="card-period">2026.05.20 – 06.02</span>
+            <span class="card-ym">2026年06月</span>
+            
+          </div>
+          <div class="card-title">最高値の連打と、固まる利上げの地面</div>
+        </a>
+
+        <a href="digest_2026-05-14_05-27.html" class="card">
+          <div class="card-meta">
+            <span class="card-period">2026.05.14 – 05.27</span>
+            <span class="card-ym">2026年05月</span>
+            
+          </div>
+          <div class="card-title">戦争プレミアムの剥落と、3つの最高値</div>
+        </a>
+
+        <a href="digest_2026-05-13_05-26.html" class="card">
+          <div class="card-meta">
+            <span class="card-period">2026.05.13 – 05.26</span>
+            <span class="card-ym">2026年05月</span>
+            
+          </div>
+          <div class="card-title">最高値の更新と、軋む停戦</div>
+        </a>
+
+        <a href="digest_2026-05-12_05-25.html" class="card">
+          <div class="card-meta">
+            <span class="card-period">2026.05.12 – 05.25</span>
+            <span class="card-ym">2026年05月</span>
+            
+          </div>
+          <div class="card-title">インフレ再加速、それでも最高値</div>
+        </a>
+
+        <a href="digest_2026-05-15_05-20.html" class="card">
+          <div class="card-meta">
+            <span class="card-period">2026.05.15 – 05.20</span>
+            <span class="card-ym">2026年05月</span>
+            
+          </div>
+          <div class="card-title">Aaa陥落とWarsh始動 — 米国信用の物語が割れた週</div>
+        </a>
+
+        <a href="digest_2026-04-27_05-14.html" class="card">
+          <div class="card-meta">
+            <span class="card-period">2026.04.27 – 05.14</span>
+            <span class="card-ym">2026年05月</span>
+            
+          </div>
+          <div class="card-title">Powellの最後、Warshの最初 — 物価が広がる中の史上最高値</div>
+        </a>
+
+        <a href="digest_2026-04-23_05-13.html" class="card">
+          <div class="card-meta">
+            <span class="card-period">2026.04.23 – 05.13</span>
+            <span class="card-ym">2026年05月</span>
+            
+          </div>
+          <div class="card-title">再加速インフレを正面から否認する、最高値ラリーの胆力</div>
+        </a>
+
+        <a href="digest_2026-04-22_05-12.html" class="card">
+          <div class="card-meta">
+            <span class="card-period">2026.04.22 – 05.12</span>
+            <span class="card-ym">2026年05月</span>
+            
+          </div>
+          <div class="card-title">Mag7の宣誓とCPI 3.8パーセントの目覚め — 記録ラリーが触れた現実</div>
+        </a>
+
+        <a href="digest_2026-04-28_05-12.html" class="card">
+          <div class="card-meta">
+            <span class="card-period">2026.04.28 – 05.12</span>
+            <span class="card-ym">2026年05月</span>
+            
+          </div>
+          <div class="card-title">Powell退任前夜の史上最高値 — 4票の反対と物価粘着が同居する春</div>
+        </a>
+
+        <a href="digest_2026-04-14_04-27.html" class="card">
+          <div class="card-meta">
+            <span class="card-period">2026.04.14 – 04.27</span>
+            <span class="card-ym">2026年04月</span>
+            
+          </div>
+          <div class="card-title">ホルムズ封鎖下の最高値 — 市場は&quot;戦時の常態化&quot;を価格にし始めた</div>
+        </a>
+
+        <a href="digest_2026-04-15_04-26.html" class="card">
+          <div class="card-meta">
+            <span class="card-period">2026.04.15 – 04.26</span>
+            <span class="card-ym">2026年04月</span>
+            
+          </div>
+          <div class="card-title">市場は『平和』を前借りした — May 1の朝、勘定書は誰に届くのか</div>
+        </a>
+
+        <a href="digest_2026-04-09_04-23.html" class="card">
+          <div class="card-meta">
+            <span class="card-period">2026.04.09 – 04.23</span>
+            <span class="card-ym">2026年04月</span>
+            
+          </div>
+          <div class="card-title">停戦延長が記録を塗り替えた夜、FRBの舵は静かに切り替わっていた</div>
+        </a>
+
+        <a href="digest_2026-04-08_04-22.html" class="card">
+          <div class="card-meta">
+            <span class="card-period">2026.04.08 – 04.22</span>
+            <span class="card-ym">2026年04月</span>
+            
+          </div>
+          <div class="card-title">停戦は延長された。それでも金は$4,780を手放さない — 市場が織り込んだ&quot;次の問い&quot;</div>
+        </a>
+
+        <a href="digest_2026-04-01_04-15_v2.html" class="card">
+          <div class="card-meta">
+            <span class="card-period">2026.04.01 – 04.15</span>
+            <span class="card-ym">2026年04月</span>
+            <span class="badge">v2</span>
+          </div>
+          <div class="card-title">停戦ラリーの裏で、金はなぜ売られなかったのか — 市場が抱える二重の緊張感</div>
+        </a>
+
+        <a href="digest_2026-03-24_04-14.html" class="card">
+          <div class="card-meta">
+            <span class="card-period">2026.03.24 – 04.14</span>
+            <span class="card-ym">2026年04月</span>
+            
+          </div>
+          <div class="card-title">グローバルマーケットダイジェスト 2026/3/24–4/14</div>
+        </a>
+
+        <a href="digest_2026-03-27_04-14.html" class="card">
+          <div class="card-meta">
+            <span class="card-period">2026.03.27 – 04.14</span>
+            <span class="card-ym">2026年04月</span>
+            
+          </div>
+          <div class="card-title">イラン戦争下の &quot;ピーク・オイル恐怖&quot; — 株は外交を買い、金は構造を買う</div>
+        </a>
+
+        <a href="digest_2026-03-26_04-09.html" class="card">
+          <div class="card-meta">
+            <span class="card-period">2026.03.26 – 04.09</span>
+            <span class="card-ym">2026年04月</span>
+            
+          </div>
+          <div class="card-title">グローバルマーケットダイジェスト 2026/3/26–4/9</div>
+        </a>
+
+        <a href="digest_2026-03-25_04-08.html" class="card">
+          <div class="card-meta">
+            <span class="card-period">2026.03.25 – 04.08</span>
+            <span class="card-ym">2026年04月</span>
+            
+          </div>
+          <div class="card-title">グローバルマーケットダイジェスト 2026/3/25–4/8</div>
+        </a>
+
+        <a href="digest_2026-03-14_03-28.html" class="card">
+          <div class="card-meta">
+            <span class="card-period">2026.03.14 – 03.28</span>
+            <span class="card-ym">2026年03月</span>
+            
+          </div>
+          <div class="card-title">グローバルマーケットダイジェスト 2026.03.14–03.28</div>
+        </a>
+  </div>
+</main>
+
+<footer class="footer">
+  GLOBAL MACRO DIGEST  ●  © <strong>akami-s</strong>  ●  Educational use only
+</footer>
+
+</body>
+</html>
